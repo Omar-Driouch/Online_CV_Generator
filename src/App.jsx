@@ -11,10 +11,10 @@ function App() {
       <div className="sections-container">
         <Education />
         <Skills />
+        <References />
       </div>
       <Footer />
     </div>
-    
   );
 }
 export default App;
