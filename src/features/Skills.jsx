@@ -11,10 +11,10 @@ const Skills = ({sendData}) => {
   const handleClick = ()=>{
     if(skill){
       setSkills([...skills,skill]);
-      sendData();
       setSkill("");
     }
   }
+  sendData(skills);
   return (
     <section className="skills-section">
       <div className="section-heading"  onClick={() => setIsHide(!isHide)}>
@@ -30,6 +30,11 @@ const Skills = ({sendData}) => {
             </span>
             <span>Add Skill</span>
           </button>
+          <div className="skills-list">
+            {skills.map((s,index)=>(
+              <span key={index}>{s}</span>
+            ))}
+          </div>
         </div>
       )}
     </section>
