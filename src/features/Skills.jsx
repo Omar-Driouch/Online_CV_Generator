@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FiPlus } from "react-icons/fi";
 import { FaChevronDown } from "react-icons/fa";
-const Skills = () => {
+const Skills = ({sendData}) => {
   const [isHide, setIsHide] = useState(false);
   const [skill , setSkill] = useState("");
   const [skills , setSkills]  = useState([]);
@@ -11,6 +11,7 @@ const Skills = () => {
   const handleClick = ()=>{
     if(skill){
       setSkills([...skills,skill]);
+      sendData();
       setSkill("");
     }
   }
