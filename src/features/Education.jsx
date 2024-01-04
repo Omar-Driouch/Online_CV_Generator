@@ -14,17 +14,26 @@ const Education = () => {
       <section className="skills-section">
         <div className="section-heading" onClick={() => setIsHide(!isHide)}>
           <h1>Education</h1>
+          <button style={{ border: "none", background: "transparent" }}>
+            <FaChevronDown />
+          </button>
         </div>
         {!isHide && (
           <div className="education-area">
+            <label>University</label>
             <input type="text" id="education-name" />
             <label>Start date</label>
             <input type="date" id="date" />
 
-            <label>End Date</label>
+            <label>Graduation date</label>
             <input type="date" id="date" />
 
-            <button className="add-skill-btn">Add Education</button>
+            <button className="add-skill-btn">
+              <span>
+                <FiPlus />
+              </span>
+              <span>Add Education</span>
+            </button>
           </div>
         )}
       </section>

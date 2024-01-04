@@ -5,7 +5,12 @@
 }
 .sections-container{
     max-width: 1000px;
-    margin: 60px auto;
+    margin:  auto;
+    padding: 100px 0;
+    
+}
+section{
+    margin:  30px 0;
 }
 header{
     border-bottom:1px solid #f5f5f5;
