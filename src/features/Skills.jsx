@@ -28,7 +28,7 @@ const Skills = ({sendData}) => {
             <span>
               <FiPlus />
             </span>
-            <span>ajouter</span>
+            <span>Add Skill</span>
           </button>
         </div>
       )}
