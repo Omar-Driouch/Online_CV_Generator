@@ -22,3 +22,15 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+
+
+-----------------
+echo "# Online_CV_Generator" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/Omar-Driouch/Online_CV_Generator.git
+git push -u origin main
+-----------------------------
