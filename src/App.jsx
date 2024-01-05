@@ -10,7 +10,6 @@ function App() {
   const handleRecive = (skills)=>{
     setData(skills);
   }
-  console.log(data);
   return (
     <div className="container-app">
       <Header />
