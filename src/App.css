@@ -5,12 +5,12 @@
 }
 .sections-container{
     max-width: 1000px;
-    margin:  auto;
-    padding: 10px 0;
-    
+    margin:auto;
+    padding: 10px 0;    
+    padding-bottom: 200px;
 }
 section{
-    margin:  10px 0;
+    margin:  30px 0;
     background-color: #f7f7f7;
 }
 header{
@@ -28,7 +28,6 @@ footer{
     position:absolute;
     bottom:0;
     left:0;
-    
 }
 footer p{
     color:"#fff";
