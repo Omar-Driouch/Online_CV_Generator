@@ -5,6 +5,10 @@ import { useState } from "react";
 import { FiPlus } from "react-icons/fi";
 import { FaChevronDown } from "react-icons/fa";
 const Education = () => {
+
+ 
+
+
   const [educations, setEducations] = useState([])
   const [school, setSchool] = useState("");
   const [degree, setDegree] = useState("");
@@ -28,9 +32,7 @@ const Education = () => {
     setGraduationDate("");
   }
 
-  console.log('====================================')
-  console.log(educations);
-  console.log('====================================')
+   
 
   const [isHide, setIsHide] = useState(false);
   const labelStyle = {
@@ -52,7 +54,7 @@ const Education = () => {
             <label style={labelStyle}>School </label>
             <input
               type="text"
-              id="education-name"
+              id="education-School"
               placeholder="Ex: UIR "
               value={school}
               onChange={(e) => {
@@ -63,7 +65,7 @@ const Education = () => {
             <label style={labelStyle}>Degree </label>
             <input
               type="text"
-              id="education-name"
+              id="education-Degree"
               placeholder="Ex: Bachelor's "
               value={degree}
               onChange={(e) => {
@@ -100,7 +102,7 @@ const Education = () => {
               }}
             />
 
-            <button className="add-skill-btn" onClick={handleEducations} >
+            <button className="add-btn" onClick={handleEducations}>
               <span>
                 <FiPlus />
               </span>
