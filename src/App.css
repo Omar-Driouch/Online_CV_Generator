@@ -3,11 +3,26 @@
     position: relative;
     background: #fff;
 }
+main{
+    display: flex;
+    position: relative;
+}
 .sections-container{
-    max-width: 1000px;
-    margin:auto;
-    padding: 10px 0;    
+    /* max-width: 1000px; */
+    /* margin:auto; */
+    padding: 15px;    
     padding-bottom: 200px;
+    flex: 1;
+    height: 100%;
+}
+.preview{
+    flex: 1;
+    background-image: url(https://picsum.photos/200/300);
+    background-repeat: no-repeat;
+    background-size: cover;
+    max-height: 1000px;
+    position: sticky;
+    top: 0;
 }
 section{
     margin:  30px 0;
@@ -16,7 +31,9 @@ section{
 header{
     border-bottom:1px solid #80b8de;
     padding:0 50px;
-    
+    display: flex;
+    gap: 300px;
+    height: 100px;
 }
 footer{
     height:100px; 
@@ -38,8 +55,6 @@ footer p{
     padding: 20px;
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
-    
-    
 }
 ::placeholder{
     color: #80b8de;
@@ -61,7 +76,7 @@ input{
     justify-content: space-between;
     align-items: center;
     padding: 10px;
-    background: #1381ca;
+    background: #619699;
     margin-bottom: 20px;
     cursor: pointer;
     border-radius: 10px;
@@ -89,11 +104,13 @@ input{
     gap: 10px;
     margin-top: 15px;
 }
-.skills-list .skill_item{
+.skills-list .item{
     border: 1px solid #ccc;
     background: #fff;
     padding: 8px 10px;
     border-radius: 10px;
+}
+.skills-list .item .skill_item{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -109,5 +126,38 @@ input{
     font-size: 18px;
     cursor: pointer;
 }
-
-
+.item .progress{
+    border-radius: 20px;
+    margin-top: 8px;
+    background: #ccc;
+}
+.progress .bar{
+    background: #619699;
+    height: 100%;
+    border-radius: inherit;
+}
+.menu{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.menu ul{
+    display: flex;
+    gap: 20px;
+}
+.menu ul li{
+    list-style: none;
+}
+.menu ul li a{
+    text-decoration: none;
+    font-weight: 500;
+    text-transform: capitalize;
+    color: #333;
+    padding: 10px 15px;
+    transition: 0.3s linear;
+    border-radius: 25px;
+}
+.menu ul li a:hover{
+    background: #619699;
+    color: #fff;
+}

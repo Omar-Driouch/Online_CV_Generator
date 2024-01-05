@@ -4,22 +4,28 @@ import { FaChevronDown ,FaTimesCircle } from "react-icons/fa";
 const Skills = ({sendData}) => {
   const [isHide, setIsHide] = useState(false);
   const [skill , setSkill] = useState("");
+  const [level , setLevel] = useState(0);
   const [skills , setSkills]  = useState([]);
-  const handleChange = (e)=>{
+  const handleChangeSkill = (e)=>{
     setSkill(e.target.value);
   }
+  const handleChangeLevel = (e)=>{
+    setLevel(e.target.value);
+  }
   const handleClick = ()=>{
-    if(skill){
+    if(skill && level){
       if(!skills.includes(skill)){
-        setSkills([...skills,skill]);
+        setSkills([...skills,{skill:skill,level:parseInt(level)}]);
         setSkill("");
+        setLevel("");
       }else{
-        setSkill("")
+        setSkill("");
+        setLevel("");
       }
     }
   }
   const handleRemoveSkill = (skill)=>{
-     setSkills([...skills.filter((s)=> s!==skill)])
+     setSkills([...skills.filter((s)=> s.skill==skill)])
   }
   sendData(skills);
   console.log(skills)
@@ -31,7 +37,14 @@ const Skills = ({sendData}) => {
       </div>
       {!isHide && (
         <div className="skills-form">
-          <input type="text" value={skill} onChange={handleChange} placeholder="ajouter votre competences" />
+          <div className="skill-input">
+            <label htmlFor="skill">Skill:</label>
+            <input type="text" value={skill} onChange={handleChangeSkill} placeholder="add skill" />
+          </div>
+          <div className="skill-input">
+            <label htmlFor="skill_level">level:</label>
+            <input type="text" value={level} onChange={handleChangeLevel} placeholder="Ex:50%" />
+          </div>
           <button className="add-btn" onClick={handleClick}>
             <span>
               <FiPlus />
@@ -40,13 +53,21 @@ const Skills = ({sendData}) => {
           </button>
           <div className="skills-list">
             {skills?.map((s,index)=>(
-              <div className="skill_item" key={index}>
+              <div className="item"  key={index}>
+              <div className="skill_item">
                 <span>
-                {s}
+                {s.skill}
+                </span>
+                <span>
+                {s.level}
                 </span>
                 <button onClick={()=>{handleRemoveSkill(s)}}>
                 <FaTimesCircle />
                 </button>
+              </div>
+                <div className="progress" style={{width:"100%",height:"10px"}}>
+                  <div className="bar" style={{width:`${s.level}%`}}></div>
+                </div>
               </div>
             ))}
           </div>
