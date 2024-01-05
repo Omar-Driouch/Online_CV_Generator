@@ -5,30 +5,31 @@ import { FaChevronDown } from "react-icons/fa";
 
 function Personalinfo(){
   const [isHide, setIsHide] = useState(false);
-        const [formData, setFormData] = useState({
-          nom: '',
-          prenom:'',
-          profil:'',
-          email: '',
-          phone: '',
-          adresse: '',
-          adresse:'',
-          description :'',
+        const [personalinfo, setPersonalinfo] = useState({
+          // nom: '',
+          // prenom:'',
+          // profil:'',
+          // email: '',
+          // phone: '',
+          // adresse: '',
+          // linkedin:'',
+          // description :'',
         });
-    const [submitted, setSubmitted] = useState(false);
+    // const [submitted, setSubmitted] = useState(false);
       
           const handleChange = (e) => {
             const { name, value } = e.target;
-            setFormData({
-              ...formData,
+            setPersonalinfo({
+              ...personalinfo,
               [name]: value,
             });
           };   
 
           const handleSubmit = (e) => {
             e.preventDefault();
-            setSubmitted(true);
+            // setSubmitted(true);
           };
+          console.log(personalinfo)
           return(
              <>
               <section className="skills-section">
@@ -40,19 +41,16 @@ function Personalinfo(){
         </div>
         {!isHide && (
              <form onSubmit={handleSubmit}>
-
-      
-   
     <div >
     
     <label>
           Nom:
-          <input type="text" name="nom" value={formData.nom} onChange={handleChange} />
+          <input type="text" name="nom" value={personalinfo.nom} onChange={handleChange} />
           <br />
       <br/>
 
           Prenom:
-          <input type="text" name="prenom" value={formData.prenom} onChange={handleChange} />
+          <input type="text" name="prenom" value={personalinfo.prenom} onChange={handleChange} />
 
         </label>
         <br />
@@ -60,14 +58,14 @@ function Personalinfo(){
 
         <label>
           Profil:
-          <input type="text" name="title" value={formData.title} onChange={handleChange} />
+          <input type="text" name="title" value={personalinfo.title} onChange={handleChange} />
         </label>
         <br />
       <br/>
        
         <label>
           email:
-          <input type="text" name="email" value={formData.email} onChange={handleChange} />
+          <input type="text" name="email" value={personalinfo.email} onChange={handleChange} />
         </label>
         <br />
         <br/>
@@ -75,34 +73,33 @@ function Personalinfo(){
         <label>
           adresse:
         
-      <input type="text" name="adresse" value={formData.adresse} onChange={handleChange} />
+      <input type="text" name="adresse" value={personalinfo.adresse} onChange={handleChange} />
         </label>
       <br/>
 
         <br />
         <label>
           phone:
-          <input type="text" name="phone" value={formData.phone} onChange={handleChange} />
+          <input type="text" name="phone" value={personalinfo.phone} onChange={handleChange} />
         </label>
       <br/>
 
         <br />
         <label>
           Linkedin:
-          <input type="text" name="Linkedin" value={formData.Linkedin} onChange={handleChange} />
+          <input type="text" name="Linkedin" value={personalinfo.Linkedin} onChange={handleChange} />
         </label>
         <br />
       <br/>
         
         <label>
           description: <br />
-          <textarea type="text" name="description" value={formData.description} onChange={handleChange} />
+          <textarea type="text" name="description" value={personalinfo.description} onChange={handleChange} />
         </label>
         <br />
     
     </div>
     <br/>
-
     <button className='add-btn' type="submit">Soumettre</button>
      </form>
   )}
