@@ -23,11 +23,14 @@ const [endDate, setEndDate] = useState("");
         role: role,
         location: location,
         workType: workType,
+        contract: contract,
+        startDate: startDate,
+        endDate: endDate
         
       },
     ]);
 
-    setCompany("");
+  setCompany("");
 	setRole("");
 	setLocation("");
 	setWorkType("");
