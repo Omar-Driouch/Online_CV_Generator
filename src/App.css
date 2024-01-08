@@ -164,3 +164,12 @@ input{
     background: #619699;
     color: #fff;
 }
+
+
+.invalid-input::placeholder {
+    color: red;
+  }
+  
+  .valid-input::placeholder {
+    color: red;
+  }
