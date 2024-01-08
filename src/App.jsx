@@ -10,6 +10,7 @@ import Experience from "./features/Experience";
 import Language from "./features/Language";
 import Preview from "./components/Preview/Preview";
 
+
 function App() {
   const [dataSkills , setDataSkills] = useState([]);
   const [dataReferences , setDataReferences] = useState([]);
@@ -31,7 +32,7 @@ function App() {
         <Experience />
         <Skills sendData={(skills)=>handleReciveSkills(skills)} />
         <Language />
-        <References sendData={handleReciveReferences}/>
+        <References sendData={(references)=>handleReciveReferences(references)}/>
       </div>
       <div className="preview">
         <div className="cv-container">
@@ -45,3 +46,6 @@ function App() {
   );
 }
 export default App;
+
+
+
