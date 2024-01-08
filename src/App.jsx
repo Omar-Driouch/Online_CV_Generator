@@ -9,43 +9,71 @@ import References from "./features/References";
 import Experience from "./features/Experience";
 import Language from "./features/Language";
 import Preview from "./components/Preview/Preview";
-
-
+ 
+ 
 function App() {
   const [dataSkills , setDataSkills] = useState([]);
   const [dataReferences , setDataReferences] = useState([]);
-
+  const [dataEducations, setDataEducations] = useState([]);
+  const [dataLanguages, setDataLanguages] = useState([]);
+  const [dataExperiences, setDataExperiences] = useState([]);
+ 
   const handleReciveSkills = (skills)=>{
     setDataSkills(skills);
   }
   const handleReciveReferences = (references)=>{
     setDataReferences(references);
   }
-
+ 
+  const handleReciveEducation = (education) => {
+    setDataEducations(education);
+  };
+ 
+   const handleReciveLanguage = (Language) => {
+     setDataLanguages(Language);
+   };
+ 
+ 
+   const handleReciveExperiences = (experiences) => {
+     setDataExperiences(experiences);
+   };
+ 
   return (
     <div className="container-app">
       <Header />
       <main>
-      <div className="sections-container">
-        <Personalinfo/>
-        <Education />
-        <Experience />
-        <Skills sendData={(skills)=>handleReciveSkills(skills)} />
-        <Language />
-        <References sendData={(references)=>handleReciveReferences(references)}/>
-      </div>
-      <div className="preview">
-        <div className="cv-container">
-        <Preview dataSkills={dataSkills} />
+        <div className="sections-container">
+          <Personalinfo />
+          <Education
+            sendData={(education) => handleReciveEducation(education)}
+          />
+          <Experience
+            sendData={(dataExperiences) =>
+              handleReciveExperiences(dataExperiences)
+            }
+          />
+          <Skills sendData={(skills) => handleReciveSkills(skills)} />
+          <Language sendData={(Language) => handleReciveLanguage(Language)} />
+          <References
+            sendData={(references) => handleReciveReferences(references)}
+          />
         </div>
-      </div>
+        <div className="preview">
+          <div className="cv-container">
+            <Preview
+              dataSkills={dataSkills}
+              dataEducations={dataEducations}
+              dataLanguages={dataLanguages}
+              dataExperiences={dataExperiences}
+              dataReferences={dataReferences}
+            />
+          </div>
+        </div>
       </main>
       <Footer />
     </div>
-
   );
 }
 export default App;
-
-
-
+ 
+ 

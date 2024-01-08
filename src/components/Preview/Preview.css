@@ -7,6 +7,16 @@
     flex: 1;
     background: #252525;
 }
+.side-left .image{
+    width: 100%;
+    text-align: center;
+    margin-top:10px;
+}
+.image img{
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+}
 .container .side-right{
     flex: 2;
     background: #fff;
