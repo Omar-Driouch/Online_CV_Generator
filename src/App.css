@@ -18,9 +18,10 @@ main{
 .preview{
     flex: 1;
     padding: 30px;
-    max-height: 1000px;
+    height: 800px;
     position: sticky;
     top: 0;
+    z-index: 1000;
 }
 .preview .cv-container{
     width: 100%;
@@ -45,9 +46,9 @@ footer{
     display:flex;
     justify-content:center ; 
     align-items:center;
-    position:absolute;
+    /* position:absolute;
     bottom:0;
-    left:0;
+    left:0; */
 }
 footer p{
     color:"#fff";
@@ -63,7 +64,7 @@ footer p{
     color: #80b8de;
     font-size: 16px;
 }
-input{
+input ,textarea{
     width: 100%;
     padding:10px;
     border:1px solid #004CB0;
@@ -173,3 +174,15 @@ input{
   .valid-input::placeholder {
     color: red;
   }
+
+  .errors-list{
+    background: red;
+    margin-top: 10px;
+    border-radius: 12px;
+  }
+.errors-list li{
+    list-style: none;
+    color: #fff;
+    font-weight: 500;
+    padding: 5px 12px;
+}

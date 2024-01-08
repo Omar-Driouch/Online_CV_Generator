@@ -26,12 +26,17 @@ const Skills = ({ sendData }) => {
         setError([...error, "skill already exist"]);
       }
     } else {
-      setError([
-        ...error,
-        "skill required","level required"
-      ]);
-      setSkill("");
-      setLevel("");
+      if(!skill){
+        setError([...error,"skill required"])
+      }
+      if(!level){
+        setError([
+          ...error,
+         "level required"
+        ]);
+        setSkill("");
+        setLevel("");
+      }
     }
   };
   const handleRemoveSkill = (skillName) => {
@@ -55,7 +60,7 @@ const Skills = ({ sendData }) => {
               type="text"
               value={skill}
               onChange={handleChangeSkill}
-              placeholder="add skill"
+              placeholder="Ex:React"
             />
           </div>
           <div className="skill-input">

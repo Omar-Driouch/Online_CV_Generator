@@ -11,10 +11,16 @@ import Language from "./features/Language";
 import Preview from "./components/Preview/Preview";
 
 function App() {
-  const [data , setData] = useState([]);
-  const handleRecive = (skills)=>{
-    setData(skills);
+  const [dataSkills , setDataSkills] = useState([]);
+  const [dataReferences , setDataReferences] = useState([]);
+
+  const handleReciveSkills = (skills)=>{
+    setDataSkills(skills);
   }
+  const handleReciveReferences = (references)=>{
+    setDataReferences(references);
+  }
+
   return (
     <div className="container-app">
       <Header />
@@ -23,19 +29,14 @@ function App() {
         <Personalinfo/>
         <Education />
         <Experience />
-        <Skills sendData={(skills)=>handleRecive(skills)} />
+        <Skills sendData={(skills)=>handleReciveSkills(skills)} />
         <Language />
-        <References/>
+        <References sendData={handleReciveReferences}/>
       </div>
       <div className="preview">
         <div className="cv-container">
-      {/* <ul className="data">
-        {data.map((d,index)=>(
-          <li key={index}>{d.skill} {d.level}</li>
-          ))}
-        </ul> */}
-        <Preview/>
-          </div>
+        <Preview dataSkills={dataSkills} />
+        </div>
       </div>
       </main>
       <Footer />

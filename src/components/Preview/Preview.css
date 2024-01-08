@@ -1,0 +1,13 @@
+.container{
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+.container .side-left{
+    flex: 1;
+    background: #252525;
+}
+.container .side-right{
+    flex: 2;
+    background: #fff;
+}
