@@ -8,6 +8,7 @@ import Skills from "./features/Skills";
 import References from "./features/References";
 import Experience from "./features/Experience";
 import Language from "./features/Language";
+import Preview from "./components/Preview/Preview";
 
 function App() {
   const [data , setData] = useState([]);
@@ -27,12 +28,14 @@ function App() {
         <References/>
       </div>
       <div className="preview">
-      <ul className="data">
+        <div className="cv-container">
+      {/* <ul className="data">
         {data.map((d,index)=>(
           <li key={index}>{d.skill} {d.level}</li>
           ))}
-        </ul>
-
+        </ul> */}
+        <Preview/>
+          </div>
       </div>
       </main>
       <Footer />
