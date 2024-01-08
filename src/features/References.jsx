@@ -3,7 +3,7 @@ import { FiPlus } from "react-icons/fi";
 import { FaChevronDown } from "react-icons/fa";
 
 
-const References = () => {
+const References = ({sendData}) => {
   const [references, setReferences] = useState([])
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -29,6 +29,8 @@ const References = () => {
     setTelephone("");
     
   }
+  console.log(references)
+  sendData(references)
 
   return (
     <>
