@@ -5,7 +5,7 @@ import { useState } from "react";
 import { FiPlus } from "react-icons/fi";
 import { FaChevronDown } from "react-icons/fa";
 import { useRef } from "react";
-const Education = () => {
+const Education = ({ sendData }) => {
   const [isValid, setIsValid] = useState(false);
   const inputRefSchool = useRef(null);
   const inputRefDegree = useRef(null);
@@ -17,7 +17,6 @@ const Education = () => {
     inputfield.current.style.border = "2px solid #80b8de";
     inputfield.current.placeholder = placeholdertext;
     inputfield.current.classList.add("valid-input");
-    
   }
 
   function handleInputValidation(inputfield) {
@@ -41,30 +40,25 @@ const Education = () => {
   const [graduationDate, setGraduationDate] = useState("");
 
   function handleEducations() {
+     
+      setEducations([
+        ...educations,
+        {
+          school: school,
+          degree: degree,
+          study: study,
+          startDate: startDate,
+          graduationDate: graduationDate,
+        },
+      ]);
 
-
-    if(isValid){
-      
-       setEducations([
-         ...educations,
-         {
-           school: school,
-           degree: degree,
-           study: study,
-           startDate: startDate,
-           graduationDate: graduationDate,
-         },
-       ]);
-
-       setSchool("");
-       setDegree("");
-       setStudy("");
-       SetStartDate("");
-       setGraduationDate("");
-       setIsValid(false);
-    }
+      setSchool("");
+      setDegree("");
+      setStudy("");
+      SetStartDate("");
+      setGraduationDate("");
+      setIsValid(false);
     
-   
   }
 
   const handleSubmit = (e) => {
@@ -75,7 +69,7 @@ const Education = () => {
     handleInputValidation(inputRefStudy);
     handleInputValidation(inputRefStartDate);
     handleInputValidation(inputRefGraduationDate);
-    
+
     handleEducations();
   };
 
@@ -85,6 +79,7 @@ const Education = () => {
     fontWeight: "bold",
   };
 
+  sendData(educations);
   return (
     <>
       <section className="skills-section">

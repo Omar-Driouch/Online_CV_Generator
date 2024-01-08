@@ -4,8 +4,8 @@ import React from "react";
 import { useState } from "react";
 import { FiPlus } from "react-icons/fi";
 import { FaChevronDown } from "react-icons/fa";
-const Experience = () => {
-  const [experinece, setExperineces] = useState([]);
+const Experience = ({sendData}) => {
+  const [experiences, setExperiences] = useState([]);
   const [company, setCompany] = useState("");
   const [role, setRole] = useState("");
   const [location, setLocation] = useState("");
@@ -15,9 +15,10 @@ const Experience = () => {
 const [endDate, setEndDate] = useState("");
 
 
-  function handleEducations() {
-    setExperineces([
-      ...experinece,
+
+  function handleExperiences() {
+    setExperiences([
+      ...experiences,
       {
         company: company,
         role: role,
@@ -25,20 +26,17 @@ const [endDate, setEndDate] = useState("");
         workType: workType,
         contract: contract,
         startDate: startDate,
-        endDate: endDate
-        
+        endDate: endDate,
       },
     ]);
 
-  setCompany("");
-	setRole("");
-	setLocation("");
-	setWorkType("");
-	setContract("");
-	SetStartDate("");
-	setEndDate("");
-    
-  
+    setCompany("");
+    setRole("");
+    setLocation("");
+    setWorkType("");
+    setContract("");
+    SetStartDate("");
+    setEndDate("");
   }
 
   const [isHide, setIsHide] = useState(false);
@@ -46,7 +44,7 @@ const [endDate, setEndDate] = useState("");
     fontSize: "20px",
     fontWeight: "bold",
   };
-
+sendData(experiences);
   return (
     <>
       <section className="skills-section">
@@ -128,12 +126,21 @@ const [endDate, setEndDate] = useState("");
               }}
             />
 
-            <button className="add-btn" onClick={handleEducations}>
+            <button className="add-btn" onClick={handleExperiences}>
               <span>
                 <FiPlus />
               </span>
               <span>Add Experience</span>
             </button>
+
+            <div className="Language-list">
+              {/* You can display the list of languages here */}
+              {experiences.map((exper, index) => (
+                <div key={index}>
+                  {exper.role} 
+                </div>
+              ))}
+            </div>
           </div>
         )}
       </section>
