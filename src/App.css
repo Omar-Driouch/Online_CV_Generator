@@ -8,20 +8,21 @@ main{
     position: relative;
 }
 .sections-container{
-    /* max-width: 1000px; */
-    /* margin:auto; */
     padding: 15px;    
     padding-bottom: 200px;
     flex: 1;
     height: 100%;
 }
-.preview{
+.preview , .start-text{
     flex: 1;
     padding: 30px 0;
     height: 1300px;
     position: sticky;
     top: 0;
     z-index: 1000;
+}
+.start-text{
+    text-align: center;
 }
 .preview .cv-container{
     width: 100%;
