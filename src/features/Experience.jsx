@@ -16,7 +16,8 @@ const [endDate, setEndDate] = useState("");
 
 
 
-  function handleExperiences() {
+  function handleExperiences(e) {
+    e.preventDefault();
     setExperiences([
       ...experiences,
       {
@@ -29,7 +30,6 @@ const [endDate, setEndDate] = useState("");
         endDate: endDate,
       },
     ]);
-
     setCompany("");
     setRole("");
     setLocation("");
@@ -40,14 +40,11 @@ const [endDate, setEndDate] = useState("");
   }
 
   const [isHide, setIsHide] = useState(false);
-  const labelStyle = {
-    fontSize: "20px",
-    fontWeight: "bold",
-  };
 sendData(experiences);
+console.log(experiences);
   return (
     <>
-      <section className="skills-section">
+      <section className="experiences-section">
         <div className="section-heading" onClick={() => setIsHide(!isHide)}>
           <h1>Experience</h1>
           <button style={{ border: "none", background: "transparent" }}>
@@ -55,94 +52,107 @@ sendData(experiences);
           </button>
         </div>
         {!isHide && (
-          <div className="experience-area">
-            <label style={labelStyle}>Company name</label>
-            <input
-              type="text"
-              placeholder="Ex: Atos "
-              value={company}
-              onChange={(e) => {
-                setCompany(e.target.value);
-              }}
-            />
+          <form onSubmit={handleExperiences}>
+            <div className="d-flex flex-wrap gap-3 justify-content-start align-items-end">
+            <div className="mb-3">
+              <label>Company name</label>
+              <input
+                type="text"
+                placeholder="Ex: Atos "
+                value={company}
+                onChange={(e) => {
+                  setCompany(e.target.value);
+                }}
+              />
+            </div>
 
-            <label style={labelStyle}>Role </label>
-            <input
-              type="text"
-              placeholder="Ex: Full-stack Developer "
-              value={role}
-              onChange={(e) => {
-                setRole(e.target.value);
-              }}
-            />
+            <div className="mb-3">
+              <label>Role </label>
+              <input
+                type="text"
+                placeholder="Ex: Full-stack Developer "
+                value={role}
+                onChange={(e) => {
+                  setRole(e.target.value);
+                }}
+              />
+            </div>
 
-            <label style={labelStyle}>Location </label>
-            <input
-              type="text"
-              placeholder="Ex: Kenitra, Morocco "
-              value={location}
-              onChange={(e) => {
-                setLocation(e.target.value);
-              }}
-            />
+            <div className="mb-3">
+              <label>Location </label>
+              <input
+                type="text"
+                placeholder="Ex: Kenitra, Morocco "
+                value={location}
+                onChange={(e) => {
+                  setLocation(e.target.value);
+                }}
+              />
+            </div>
 
-            <label style={labelStyle}>Type </label>
-            <input
-              type="text"
-              placeholder="Ex: Remote , Hybrid, Site "
-              value={workType}
-              onChange={(e) => {
-                setWorkType(e.target.value);
-              }}
-            />
+            <div className="mb-3">
+              <label>Type </label>
+              <input
+                type="text"
+                placeholder="Ex: Remote , Hybrid, Site "
+                value={workType}
+                onChange={(e) => {
+                  setWorkType(e.target.value);
+                }}
+              />
+            </div>
 
-            <label style={labelStyle}>Contract </label>
-            <input
-              type="text"
-              placeholder="Ex: Full-Time , Part-Time, Intership "
-              value={contract}
-              onChange={(e) => {
-                setContract(e.target.value);
-              }}
-            />
+            <div className="mb-3">
+              <label>Contract </label>
+              <input
+                type="text"
+                placeholder="Ex: Full-Time , Part-Time, Intership "
+                value={contract}
+                onChange={(e) => {
+                  setContract(e.target.value);
+                }}
+              />
+            </div>
 
-            <label style={labelStyle}>Start date</label>
-            <input
-              type="date"
-              id="date"
-              value={startDate}
-              onChange={(e) => {
-                SetStartDate(e.target.value);
-              }}
-            />
+            <div className="mb-3">
+              <label>Start date</label>
+              <input
+                type="date"
+                id="date"
+                value={startDate}
+                onChange={(e) => {
+                  SetStartDate(e.target.value);
+                }}
+              />
+            </div>
 
-            <label style={labelStyle}>End date</label>
-            <input
-              type="date"
-              id="date"
-              value={endDate}
-              onChange={(e) => {
-                setEndDate(e.target.value);
-              }}
-            />
-
-            <button className="add-btn" onClick={handleExperiences}>
+            <div className="mb-3">
+              <label>End date</label>
+              <input
+                type="date"
+                id="date"
+                value={endDate}
+                onChange={(e) => {
+                  setEndDate(e.target.value);
+                }}
+              />
+            </div>
+            </div>
+            <button className="add-btn" type="submit">
               <span>
                 <FiPlus />
               </span>
               <span>Add Experience</span>
             </button>
-
-            <div className="Language-list">
-              {/* You can display the list of languages here */}
+          </form>
+        )}
+            <div className="experiences-list">
               {experiences.map((exper, index) => (
                 <div key={index}>
                   {exper.role} 
                 </div>
               ))}
             </div>
-          </div>
-        )}
       </section>
     </>
   );

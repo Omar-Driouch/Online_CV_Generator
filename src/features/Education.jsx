@@ -51,7 +51,6 @@ const Education = ({ sendData }) => {
           graduationDate: graduationDate,
         },
       ]);
-
       setSchool("");
       setDegree("");
       setStudy("");
@@ -74,15 +73,10 @@ const Education = ({ sendData }) => {
   };
 
   const [isHide, setIsHide] = useState(false);
-  const labelStyle = {
-    fontSize: "20px",
-    fontWeight: "bold",
-  };
-
   sendData(educations);
   return (
     <>
-      <section className="skills-section">
+      <section className="education-section">
         <div className="section-heading" onClick={() => setIsHide(!isHide)}>
           <h1>Education</h1>
           <button style={{ border: "none", background: "transparent" }}>
@@ -91,7 +85,9 @@ const Education = ({ sendData }) => {
         </div>
         {!isHide && (
           <form onSubmit={handleSubmit}>
-            <label style={labelStyle}>School </label>
+            <div className="d-flex flex-wrap gap-3 justify-content-start align-items-end">
+              <div className="mb-3">
+            <label>School </label>
             <input
               ref={inputRefSchool}
               type="text"
@@ -103,8 +99,10 @@ const Education = ({ sendData }) => {
                 backToFirstStatus(inputRefSchool, "Ex: UIR ");
               }}
             />
+            </div>
+            <div className="mb-3">
 
-            <label style={labelStyle}>Degree </label>
+            <label>Degree </label>
             <input
               ref={inputRefDegree}
               type="text"
@@ -116,7 +114,10 @@ const Education = ({ sendData }) => {
                 backToFirstStatus(inputRefDegree, "Ex: Bachelor's ");
               }}
             />
-            <label style={labelStyle}>Field of study </label>
+            </div>
+            <div className="mb-3">
+
+            <label>Field of study </label>
             <input
               ref={inputRefStudy}
               type="text"
@@ -128,7 +129,10 @@ const Education = ({ sendData }) => {
                 backToFirstStatus(inputRefStudy, "Ex: FULL-Stack Developer ");
               }}
             />
-            <label style={labelStyle}>Start date</label>
+            </div>
+            <div className="mb-3">
+
+            <label>Start date</label>
             <input
               ref={inputRefStartDate}
               type="date"
@@ -139,8 +143,10 @@ const Education = ({ sendData }) => {
                 backToFirstStatus(inputRefStartDate, "");
               }}
             />
+            </div>
+            <div className="mb-3">
 
-            <label style={labelStyle}>Graduation date</label>
+            <label>Graduation date</label>
             <input
               type="date"
               id="date"
@@ -151,24 +157,25 @@ const Education = ({ sendData }) => {
                 backToFirstStatus(inputRefGraduationDate, "");
               }}
             />
-
+            </div>
+            </div>
             <button className="add-btn">
               <span>
                 <FiPlus />
               </span>
               <span>Add Education </span>
             </button>
-            <div>
-              <ul>
-                {educations.map((e) => (
-                  <li className="add-btn" key={e.id}>
-                    {e.school}
-                  </li>
-                ))}
-              </ul>
-            </div>
           </form>
         )}
+            <div className="educations-list">
+                {educations.map((e) => (
+                  <div className="item" key={e.id}>
+                    <div className="text-primary">{e.startDate} / {e.graduationDate}</div>
+                    <h5 className="bg-warning text-light px-2 py-1 rounded-2 fs-6 d-inline-block">{e.degree}</h5>
+                    <p className="text-muted fw-bold">{e.study} <br /> {e.school}</p>
+                  </div>
+                ))}
+            </div>
       </section>
     </>
   );

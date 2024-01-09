@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import "./App.css";
+import ReactToPrint from "react-to-print"
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Personalinfo from "./features/PersonalInfo";
@@ -17,33 +18,17 @@ function App() {
   const [dataEducations, setDataEducations] = useState([]);
   const [dataLanguages, setDataLanguages] = useState([]);
   const [dataExperiences, setDataExperiences] = useState([]);
-<<<<<<< HEAD
-
-=======
+  const [dataPersonnalInfo, setDataPersonnalInfo] = useState({});
  
->>>>>>> a957ce1684623dc4f79e0982310f8483581f2619
+  const handleReceivePersonnalInfo = (info)=>{
+      setDataPersonnalInfo(info);
+  }
   const handleReciveSkills = (skills)=>{
     setDataSkills(skills);
   }
   const handleReciveReferences = (references)=>{
     setDataReferences(references);
   }
-<<<<<<< HEAD
-
-  const handleReciveEducation = (education) => {
-    setDataEducations(education);
-  };
-
-   const handleReciveLanguage = (Language) => {
-     setDataLanguages(Language);
-   };
-
-
-   const handleReciveExperiences = (experiences) => {
-     setDataExperiences(experiences);
-   };
-
-=======
  
   const handleReciveEducation = (education) => {
     setDataEducations(education);
@@ -52,25 +37,23 @@ function App() {
    const handleReciveLanguage = (Language) => {
      setDataLanguages(Language);
    };
- 
- 
    const handleReciveExperiences = (experiences) => {
      setDataExperiences(experiences);
    };
- 
->>>>>>> a957ce1684623dc4f79e0982310f8483581f2619
+   const printRef = useRef();
+   console.log(dataEducations);
   return (
     <div className="container-app">
       <Header />
       <main>
         <div className="sections-container">
-          <Personalinfo />
+          <Personalinfo sendData={(info)=>handleReceivePersonnalInfo(info)} />
           <Education
             sendData={(education) => handleReciveEducation(education)}
           />
           <Experience
-            sendData={(dataExperiences) =>
-              handleReciveExperiences(dataExperiences)
+            sendData={(experiences) =>
+              handleReciveExperiences(experiences)
             }
           />
           <Skills sendData={(skills) => handleReciveSkills(skills)} />
@@ -80,13 +63,19 @@ function App() {
           />
         </div>
         <div className="preview">
+        <ReactToPrint
+      trigger={()=> <button>download</button>}
+      content={() => printRef.current}
+      />
           <div className="cv-container">
             <Preview
+              ref={printRef}
               dataSkills={dataSkills}
               dataEducations={dataEducations}
               dataLanguages={dataLanguages}
               dataExperiences={dataExperiences}
               dataReferences={dataReferences}
+              dataPersonnalInfo={dataPersonnalInfo}
             />
           </div>
         </div>
@@ -96,5 +85,3 @@ function App() {
   );
 }
 export default App;
- 
- 

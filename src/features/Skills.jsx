@@ -23,24 +23,19 @@ const Skills = ({ sendData }) => {
         setLevel("");
         setError([]);
       } else{
-        setError([...error, "skill already exist"]);
-      }
-    } else {
-      if(!skill){
-        setError([...error,"skill required"])
-      }
-      if(!level){
-        setError([
-          ...error,
-         "level required"
-        ]);
-        setSkill("");
-        setLevel("");
+        if(!error.includes("skill already exist")){
+          setError([...error, "skill already exist"]);
+          setLevel();
+          setSkill("");
+        }else{
+          setError([])
+        }
       }
     }
   };
   const handleRemoveSkill = (skillName) => {
     setSkills([...skills.filter((s) => s.skill !== skillName)]);
+    setError([])
   };
   sendData(skills);
   console.log(skills);
@@ -66,10 +61,12 @@ const Skills = ({ sendData }) => {
           <div className="skill-input">
             <label htmlFor="skill_level">level:</label>
             <input
-              type="text"
+              type="number"
+              min={0}
+              max={100}
               value={level}
               onChange={handleChangeLevel}
-              placeholder="Ex:50%"
+              placeholder="Ex:50"
             />
           </div>
           <button className="add-btn" onClick={handleClick}>

@@ -11,10 +11,6 @@ const References = ({sendData}) => {
 
  
   const [isHide, setIsHide] = useState(false);
-  const labelStyle = {
-    fontSize: "20px",
-    fontWeight: "bold",
-  };
 
 
   function handleReferences() {
@@ -43,14 +39,14 @@ const References = ({sendData}) => {
         </div>
         {!isHide && (
           <div className="References-ts">
-            <label style={labelStyle}>Name</label>
+            <label>Name</label>
             <input type="text" id="References-name" 
             value={name}
             onChange={(e) => {
               setName(e.target.value);
             }}
             />
-            <label style={labelStyle}>Description</label>
+            <label>Description</label>
             <input type="text" id="references-desc" 
             value={description}
             onChange={(e) => {
@@ -58,7 +54,7 @@ const References = ({sendData}) => {
             }}
             />
 
-            <label style={labelStyle}>Phone number</label>
+            <label>Phone number</label>
             <input type="tel" id="References-tel" 
             value={telephone}
             onChange={(e) => {

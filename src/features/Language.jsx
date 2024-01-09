@@ -17,11 +17,10 @@ const Language = ({sendData}) => {
       },
     ]);
   };
-
    sendData(languages);
-
+   console.log(languages)
   return (
-    <section className="skills-section">
+    <section className="languages-section">
       <div className="section-heading" onClick={() => setIsHide(!isHide)}>
         <h1>Language</h1>
         <button style={{ border: "none", background: "transparent" }}>
@@ -30,6 +29,7 @@ const Language = ({sendData}) => {
       </div>
       {!isHide && (
         <div className="language-form">
+            <div className="d-flex flex-wrap my-3 gap-5 justify-content-start align-items-end">
           <div className="language-input">
             <label htmlFor="language">Language:</label>
             <select
@@ -59,16 +59,15 @@ const Language = ({sendData}) => {
               {/* Add more level options as needed */}
             </select>
           </div>
-
+          </div>
           <button className="add-btn" onClick={handleAddLanguage}>
             <span>
               <FiPlus />
             </span>
             <span>Add Language</span>
           </button>
-
-           
-
+        </div>
+      )}
           <div className="component-list">
             {languages?.map((l, index) => (
               <div className="item" key={index}>
@@ -80,13 +79,10 @@ const Language = ({sendData}) => {
                   <button>
                     <FaTimesCircle />
                   </button>
-                </div>
-               
+                </div>               
               </div>
             ))}
           </div>
-        </div>
-      )}
     </section>
   );
 };
