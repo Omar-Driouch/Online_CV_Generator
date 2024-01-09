@@ -78,8 +78,7 @@ const Preview = forwardRef(({dataSkills,dataLanguages,dataPersonnalInfo ,dataEdu
        <div className="side-right px-2 py-4">
         {dataPersonnalInfo?.description &&
         <div className="desription-profile">
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Pariatur non dignissimos voluptatum voluptatibus inventore quos, deleniti distinctio eligendi autem nihil vel possimus animi ab maiores voluptas architecto, officia placeat quod.
-            </p>
+            <p>{dataPersonnalInfo.description}</p>
         </div>
         }
         {dataEducations.length !== 0 &&
