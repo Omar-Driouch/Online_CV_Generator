@@ -6,6 +6,7 @@ import { FiPlus } from "react-icons/fi";
 import { FaChevronDown } from "react-icons/fa";
 import { useRef } from "react";
 const Education = ({ sendData }) => {
+  let IsValid = false;
   const [isValid, setIsValid] = useState(false);
   const inputRefSchool = useRef(null);
   const inputRefDegree = useRef(null);
@@ -17,18 +18,21 @@ const Education = ({ sendData }) => {
     inputfield.current.style.border = "2px solid #80b8de";
     inputfield.current.placeholder = placeholdertext;
     inputfield.current.classList.add("valid-input");
+   
   }
 
   function handleInputValidation(inputfield) {
     if (inputfield.current.value.trim() !== "") {
-      setIsValid(true);
+      
       inputfield.current.style.border = "2px solid #80b8de";
+       return true;
     } else {
-      setIsValid(false);
+      
       inputfield.current.style.border = "2px solid red";
       inputfield.current.placeholder = "Please fill up this field";
       inputfield.current.classList.add("invalid-input");
       inputfield.current.focus();
+      return  false;
     }
   }
 
@@ -56,20 +60,24 @@ const Education = ({ sendData }) => {
       setStudy("");
       SetStartDate("");
       setGraduationDate("");
-      setIsValid(false);
-    
+       
+        IsValid = false;
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    handleInputValidation(inputRefSchool);
-    handleInputValidation(inputRefDegree);
-    handleInputValidation(inputRefStudy);
-    handleInputValidation(inputRefStartDate);
-    handleInputValidation(inputRefGraduationDate);
-
-    handleEducations();
+    if ((
+      handleInputValidation(inputRefSchool) &&
+      handleInputValidation(inputRefDegree) &&
+      handleInputValidation(inputRefStudy) &&
+      handleInputValidation(inputRefStartDate) &&
+      handleInputValidation(inputRefGraduationDate)
+      )=== true
+    ) {
+      handleEducations();
+    }  
+    
   };
 
   const [isHide, setIsHide] = useState(true);
