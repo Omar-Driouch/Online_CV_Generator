@@ -6,7 +6,7 @@ const Language = ({sendData}) => {
   const [languages, setLanguages] = useState([]);
   const [language, setLanguage] = useState("Arabic");
   const [level, setLevel] = useState("Native");
-  const [isHide, setIsHide] = useState(false);
+  const [isHide, setIsHide] = useState(true);
 
   const handleAddLanguage = () => {
     setLanguages([

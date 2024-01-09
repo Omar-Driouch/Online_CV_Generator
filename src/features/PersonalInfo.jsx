@@ -41,9 +41,7 @@ const PersonalInfo = ({sendData}) => {
         setPhone("")
         setDescription("")
         setImage("")
-    }
-    
-    // console.log(personalinfo);
+    }    
     sendData(personalinfo);
   return (
      <section className="personal-info-section">
@@ -53,7 +51,7 @@ const PersonalInfo = ({sendData}) => {
             <FaChevronDown />
           </button>
         </div>
-        {isHide && 
+        {!isHide && 
         <form onSubmit={handleSubmit}>
             <div className="d-flex flex-wrap gap-3 justify-content-start align-items-end">
             <div className="mb-3 img-box">

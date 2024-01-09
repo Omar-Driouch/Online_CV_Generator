@@ -3,7 +3,7 @@ import {MdLocationPin} from "react-icons/md"
 import { CiMail } from "react-icons/ci"
 import { forwardRef } from "react"
 import "./Preview.css"
-const Preview = forwardRef(({dataSkills,dataLanguages,dataPersonnalInfo ,dataEducations},ref) => {
+const Preview = forwardRef(({dataSkills,dataLanguages,dataPersonnalInfo ,dataEducations ,dataExperiences},ref) => {
   return (
     <div className="container" ref={ref}>
        <div className="side-left">
@@ -67,7 +67,7 @@ const Preview = forwardRef(({dataSkills,dataLanguages,dataPersonnalInfo ,dataEdu
         <div className="langues-content text-light ps-2 mt-5">
             <h4>Langues</h4>
             {dataLanguages.map((lang,index)=>(
-                <div className="skill-item mt-2 d-flex gap-5 align-items-center">
+                <div className="skill-item mt-2 d-flex gap-5 align-items-center" key={index}>
                 <span className="text-capitalize">{lang.language}</span>
                 <span className="text-capitalize">{lang.level}</span>
             </div>
@@ -89,10 +89,20 @@ const Preview = forwardRef(({dataSkills,dataLanguages,dataPersonnalInfo ,dataEdu
                 {dataEducations.map((edu,index)=>(
                     <div className="education_item ps-2 mt-2" key={index}>
                     <div className="start-end-date fs-7 fw-bold text-primary">{edu.startDate}/{edu.graduationDate}</div>
-                    <p>{edu.degree} in {edu.school} specialite {edu.field}</p>
+                    <p>{edu.degree} in {edu.school} specialite {edu.study}</p>
                 </div>
                     ))}
             </div>
+        </div>
+        }
+      {dataExperiences.length !== 0 &&
+        <div className="experiences-container">
+            <h4 className="ps-2">Experience</h4>
+            {dataExperiences.map((exp,index)=>(
+                <li key={index}>
+                    {exp.role}
+                </li>
+            ))}
         </div>
         }
        </div>

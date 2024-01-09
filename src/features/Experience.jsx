@@ -39,7 +39,7 @@ const [endDate, setEndDate] = useState("");
     setEndDate("");
   }
 
-  const [isHide, setIsHide] = useState(false);
+  const [isHide, setIsHide] = useState(true);
 sendData(experiences);
 console.log(experiences);
   return (

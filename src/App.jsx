@@ -45,6 +45,10 @@ function App() {
   return (
     <div className="container-app">
       <Header />
+      <ReactToPrint
+      trigger={()=> <button className="border-0 text-light fw-bold rounded-1 m-3 bg-primary py-2 px-5">download</button>}
+      content={() => printRef.current}
+      />
       <main>
         <div className="sections-container">
           <Personalinfo sendData={(info)=>handleReceivePersonnalInfo(info)} />
@@ -63,10 +67,6 @@ function App() {
           />
         </div>
         <div className="preview">
-        <ReactToPrint
-      trigger={()=> <button>download</button>}
-      content={() => printRef.current}
-      />
           <div className="cv-container">
             <Preview
               ref={printRef}

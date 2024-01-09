@@ -2,7 +2,7 @@ import { useState } from "react";
 import { FiPlus } from "react-icons/fi";
 import { FaChevronDown, FaTimesCircle } from "react-icons/fa";
 const Skills = ({ sendData }) => {
-  const [isHide, setIsHide] = useState(false);
+  const [isHide, setIsHide] = useState(true);
   const [skill, setSkill] = useState("");
   const [error, setError] = useState([]);
   const [level, setLevel] = useState();

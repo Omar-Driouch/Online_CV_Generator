@@ -10,7 +10,7 @@ const References = ({sendData}) => {
   const [telephone, setTelephone] = useState("");
 
  
-  const [isHide, setIsHide] = useState(false);
+  const [isHide, setIsHide] = useState(true);
 
 
   function handleReferences() {

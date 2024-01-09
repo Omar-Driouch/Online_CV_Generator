@@ -72,7 +72,7 @@ const Education = ({ sendData }) => {
     handleEducations();
   };
 
-  const [isHide, setIsHide] = useState(false);
+  const [isHide, setIsHide] = useState(true);
   sendData(educations);
   return (
     <>
