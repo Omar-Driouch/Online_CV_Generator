@@ -229,7 +229,7 @@ label{
   }
   
   .valid-input::placeholder {
-    color: red;
+    color: #619699;;
   }
 
   .errors-list{

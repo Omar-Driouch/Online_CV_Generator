@@ -1,3 +1,5 @@
+/* eslint-disable react/display-name */
+/* eslint-disable react/prop-types */
 import { FaPhoneAlt  } from "react-icons/fa"
 import {MdLocationPin} from "react-icons/md"
 import { CiMail } from "react-icons/ci"

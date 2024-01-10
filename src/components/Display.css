@@ -1,0 +1,75 @@
+.item-education {
+	background-color: rgb(226, 226, 226);
+	align-items: center;
+	text-align: center;
+	align-content: center;
+	border: 1px solid rgb(255, 255, 255);
+	border-radius: 15px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+	display: flex;
+	flex-direction: row;
+	gap: 10px;
+	padding: 5px 5px 5px
+	
+}
+
+
+.item-education h6{
+	background-color: #fff;
+	padding: 10px 10px;
+	border: #009b17;
+	border-radius: 15px;
+	border: 1px solid #e0e0e0;
+	margin-top: 10px;
+}
+
+
+.item-education button {
+	background-color: rgb(224, 224, 224);
+	padding: 1px 5px;
+
+	border-radius: 10px;
+	font-weight: 700;
+	color: #fff;
+	border-color: #fff;
+}
+
+.item-education .removebutton {
+	background-color: rgb(255, 255, 255);
+	align-items: center;
+	border: 1px solid;
+	border-radius: 8px;
+	box-sizing: border-box;
+	color: #e20c0c;
+	transition: .2s;
+}
+
+.removebutton:hover {
+	background: #e41d03;
+	color: #fff;
+}
+
+.item-education .updatebutton:hover {
+	background-color: #009b17;
+	color: #fff;
+}
+
+ 
+
+.item-education .updatebutton {
+	background-color: rgb(255, 255, 255);
+	align-items: center;
+	border: 1px solid;
+	border-radius: 8px;
+ 
+	box-sizing: border-box;
+	color: #009b17;
+	transition: .2s;
+}
+
+.item-education .buttonsDiv {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+	flex-wrap: wrap;
+}

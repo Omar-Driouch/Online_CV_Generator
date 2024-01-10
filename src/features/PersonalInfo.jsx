@@ -62,35 +62,35 @@ const PersonalInfo = ({sendData}) => {
                 {image && <img src={image} alt="#"/>}
             </div>
             <div className="mb-3">
-                <label htmlFor="nom">nom</label>
+                <label htmlFor="nom">Last Name</label>
                 <input type="text" placeholder="entrer votre nom .." value={nom} onChange={(e)=>{setNom(e.target.value)}}  />
             </div>
             <div className="mb-3">
-                <label htmlFor="prenom">prenom</label>
+                <label htmlFor="prenom">First Name</label>
                 <input type="text" placeholder="entrer votre prenom .." value={prenom} onChange={(e)=>{setPrenom(e.target.value)}}   />
             </div>
             <div className="mb-3">
-                <label htmlFor="profile">profile</label>
+                <label htmlFor="profile">Profile</label>
                 <input type="text" placeholder="Ex : Fullstack Developper  .." value={profile} onChange={(e)=>{setProfil(e.target.value)}}   />
             </div>
             <div className="mb-3">
-                <label htmlFor="email">email</label>
+                <label htmlFor="email">Email</label>
                 <input type="text" placeholder="Ex: nom@gmail.com" value={email} onChange={(e)=>{setEmail(e.target.value)}}  />
             </div>
             <div className="mb-3">
-                <label htmlFor="adresse">adresse</label>
+                <label htmlFor="adresse">address</label>
                 <input type="text" placeholder="Ex : Street Mohamed V apt 18 rabat" value={adresse} onChange={(e)=>{setAdresse(e.target.value)}}  />
             </div>
             <div className="mb-3">
-                <label htmlFor="phone">phone</label>
+                <label htmlFor="phone">Phone</label>
                 <input type="text" placeholder="Ex : 0689232549" value={phone} onChange={(e)=>{setPhone(e.target.value)}}  />
             </div>
             <div className="mb-3">
-                <label htmlFor="description">description</label>
+                <label htmlFor="description">Description</label>
                 <textarea cols="30" rows="1" value={description} onChange={(e)=>{setDescription(e.target.value)}}></textarea>
             </div>
        </div>
-            <button className="add-btn" type="submit">submit</button>
+            <button className="add-btn" type="submit">Add Personal info</button>
         </form>
     }
      </section>
