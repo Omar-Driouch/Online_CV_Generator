@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable no-unused-vars */
 import React from "react";
@@ -5,19 +6,22 @@ import { useState } from "react";
 import { FiPlus } from "react-icons/fi";
 import { FaChevronDown } from "react-icons/fa";
 import { useRef } from "react";
+import EducationItemDisplay from "../components/EducationItemDisplay";
 const Education = ({ sendData }) => {
   let IsValid = false;
-  const [isValid, setIsValid] = useState(false);
+   const [inputClass, setInputClass] = useState("green-placeholder");
+  const [isUpdate, setIsUpdate] = useState(false);
   const inputRefSchool = useRef(null);
   const inputRefDegree = useRef(null);
   const inputRefStudy = useRef(null);
   const inputRefStartDate = useRef(null);
   const inputRefGraduationDate = useRef(null);
 
+   
   function backToFirstStatus(inputfield, placeholdertext) {
     inputfield.current.style.border = "2px solid #80b8de";
-    inputfield.current.placeholder = placeholdertext;
-    inputfield.current.classList.add("valid-input");
+    inputfield.current.placeholder = placeholdertext ;
+    setInputClass("valid-input");
    
   }
 
@@ -29,8 +33,9 @@ const Education = ({ sendData }) => {
     } else {
       
       inputfield.current.style.border = "2px solid red";
-      inputfield.current.placeholder = "Please fill up this field";
-      inputfield.current.classList.add("invalid-input");
+      inputfield.current.placeholder =
+      inputfield.current.id + " is required";
+       setInputClass("invalid-input");
       inputfield.current.focus();
       return  false;
     }
@@ -42,12 +47,14 @@ const Education = ({ sendData }) => {
   const [study, setStudy] = useState("");
   const [startDate, SetStartDate] = useState("");
   const [graduationDate, setGraduationDate] = useState("");
+  const [educationToUpdate, seteEducationToUpdate] = useState({});
 
   function handleEducations() {
      
       setEducations([
         ...educations,
         {
+          id: Date.now(),
           school: school,
           degree: degree,
           study: study,
@@ -75,12 +82,77 @@ const Education = ({ sendData }) => {
       handleInputValidation(inputRefGraduationDate)
       )=== true
     ) {
-      handleEducations();
+      if(!isUpdate)
+      {
+        handleEducations();
+      }
+      else
+      {
+        setEducations(
+          educations.map((ed) => {
+            /* console.log("aaa", ed.id == educationToUpdate.id); */
+            return ed.id == educationToUpdate.id
+              ? {
+                  id: educationToUpdate.id,
+                  school: school,
+                  degree: degree,
+                  study: study,
+                  startDate: startDate,
+                  graduationDate: graduationDate,
+                }
+              : ed;
+          })
+        );
+          
+         
+        setIsUpdate(false);
+        setSchool("");
+        setDegree("");
+        setStudy("");
+        SetStartDate("");
+        setGraduationDate("");
+
+        IsValid = false;
+      }
     }  
     
   };
 
-  const [isHide, setIsHide] = useState(true);
+ const handleRemove = (educationToRemove) => {
+ 
+    setEducations([...educations.filter(
+     (education) => education.id !== educationToRemove.id
+   )]) 
+
+   console.log("Remove education:", educationToRemove);
+   
+ };
+
+  const handleUpdateEducation = (educationToUpdate) => {
+     
+      setSchool(educationToUpdate.school);
+      setDegree(educationToUpdate.degree);
+      setStudy(educationToUpdate.study);
+      SetStartDate(educationToUpdate.startDate);
+      setGraduationDate(educationToUpdate.graduationDate);
+      const newEdu = {
+        id:educationToUpdate.id,
+        school: school,
+        degree: degree,
+        study: study,
+        startDate: startDate,
+        graduationDate: graduationDate,
+      };
+       
+      seteEducationToUpdate(newEdu);
+      setIsUpdate(true);
+      
+
+  };
+
+ 
+ const [isHide, setIsHide] = useState(true);
+  
   sendData(educations);
   return (
     <>
@@ -94,96 +166,102 @@ const Education = ({ sendData }) => {
         {!isHide && (
           <form onSubmit={handleSubmit}>
             <div className="d-flex flex-wrap gap-3 justify-content-start align-items-end">
+              <div className="mb-3" style={{ width: "30%" }}>
+                <label>School </label>
+                <input
+                  ref={inputRefSchool}
+                  type="text"
+                  className={inputClass}
+                  id="School"
+                  placeholder="Ex: UIR "
+                  value={school}
+                  onChange={(e) => {
+                    setSchool(e.target.value);
+                    backToFirstStatus(inputRefSchool, "Ex: UIR ");
+                  }}
+                />
+              </div>
+              <div className="mb-3" style={{ width: "30%" }}>
+                <label>Degree </label>
+                <input
+                  ref={inputRefDegree}
+                  type="text"
+                  className={inputClass}
+                  id="Degree"
+                  placeholder="Ex: Bachelor's "
+                  value={degree}
+                  onChange={(e) => {
+                    setDegree(e.target.value);
+                    backToFirstStatus(inputRefDegree, "Ex: Bachelor's ");
+                  }}
+                />
+              </div>
+              <div className="mb-3" style={{ width: "30%" }}>
+                <label>Field of study </label>
+                <input
+                  ref={inputRefStudy}
+                  type="text"
+                  className={inputClass}
+                  id="Field of Study"
+                  placeholder="Ex: FULL-Stack Developer "
+                  value={study}
+                  onChange={(e) => {
+                    setStudy(e.target.value);
+                    backToFirstStatus(
+                      inputRefStudy,
+                      "Ex: FULL-Stack Developer "
+                    );
+                  }}
+                />
+              </div>
               <div className="mb-3">
-            <label>School </label>
-            <input
-              ref={inputRefSchool}
-              type="text"
-              id="education-School"
-              placeholder="Ex: UIR "
-              value={school}
-              onChange={(e) => {
-                setSchool(e.target.value);
-                backToFirstStatus(inputRefSchool, "Ex: UIR ");
-              }}
-            />
-            </div>
-            <div className="mb-3">
-
-            <label>Degree </label>
-            <input
-              ref={inputRefDegree}
-              type="text"
-              id="education-Degree"
-              placeholder="Ex: Bachelor's "
-              value={degree}
-              onChange={(e) => {
-                setDegree(e.target.value);
-                backToFirstStatus(inputRefDegree, "Ex: Bachelor's ");
-              }}
-            />
-            </div>
-            <div className="mb-3">
-
-            <label>Field of study </label>
-            <input
-              ref={inputRefStudy}
-              type="text"
-              id="education-name"
-              placeholder="Ex: FULL-Stack Developer "
-              value={study}
-              onChange={(e) => {
-                setStudy(e.target.value);
-                backToFirstStatus(inputRefStudy, "Ex: FULL-Stack Developer ");
-              }}
-            />
-            </div>
-            <div className="mb-3">
-
-            <label>Start date</label>
-            <input
-              ref={inputRefStartDate}
-              type="date"
-              id="date"
-              value={startDate}
-              onChange={(e) => {
-                SetStartDate(e.target.value);
-                backToFirstStatus(inputRefStartDate, "");
-              }}
-            />
-            </div>
-            <div className="mb-3">
-
-            <label>Graduation date</label>
-            <input
-              type="date"
-              id="date"
-              ref={inputRefGraduationDate}
-              value={graduationDate}
-              onChange={(e) => {
-                setGraduationDate(e.target.value);
-                backToFirstStatus(inputRefGraduationDate, "");
-              }}
-            />
-            </div>
+                <label>Start date</label>
+                <input
+                  ref={inputRefStartDate}
+                  type="date"
+                  id="Start date"
+                  value={startDate}
+                  onChange={(e) => {
+                    SetStartDate(e.target.value);
+                    backToFirstStatus(inputRefStartDate, "");
+                  }}
+                />
+              </div>
+              <div className="mb-3">
+                <label>Graduation date</label>
+                <input
+                  type="date"
+                  id="Graduation date"
+                  ref={inputRefGraduationDate}
+                  value={graduationDate}
+                  onChange={(e) => {
+                    setGraduationDate(e.target.value);
+                    backToFirstStatus(inputRefGraduationDate, "");
+                  }}
+                />
+              </div>
             </div>
             <button className="add-btn">
               <span>
                 <FiPlus />
               </span>
-              <span>Add Education </span>
+              {isUpdate ? (
+                <span>Update Education </span>
+              ) : (
+                <span>Add Education </span>
+              )}
             </button>
           </form>
         )}
-            <div className="educations-list">
-                {educations.map((e) => (
-                  <div className="item" key={e.id}>
-                    <div className="text-primary">{e.startDate} / {e.graduationDate}</div>
-                    <h5 className="bg-warning text-light px-2 py-1 rounded-2 fs-6 d-inline-block">{e.degree}</h5>
-                    <p className="text-muted fw-bold">{e.study} <br /> {e.school}</p>
-                  </div>
-                ))}
-            </div>
+        <div className="educations-list">
+          {educations.map((e) => (
+            <EducationItemDisplay
+              handleRemove={(a) => handleRemove(a)}
+              handleUpdateEducation={(a) => handleUpdateEducation(a)}
+              education={e}
+            />
+          ))}
+        </div>
       </section>
     </>
   );
