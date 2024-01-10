@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { FiPlus } from "react-icons/fi";
-import { FaChevronDown, FaTimesCircle } from "react-icons/fa";
+import { FaChevronDown, FaRegEdit, FaTimesCircle } from "react-icons/fa";
 const Skills = ({ sendData }) => {
   const [isHide, setIsHide] = useState(true);
+  const [isUpdate, setIsUpdate] = useState(false);
+  const [id, setId] = useState(1);
   const [skill, setSkill] = useState("");
   const [error, setError] = useState([]);
   const [level, setLevel] = useState();
@@ -16,26 +18,40 @@ const Skills = ({ sendData }) => {
   console.log(skills);
   console.log(error);
   const handleClick = () => {
-    if (skill && level) {
-      if (skills.filter((s)=>s.skill === skill).length < 1) {
-        setSkills([...skills, { skill: skill, level: parseInt(level) }]);
-        setSkill("");
-        setLevel("");
-        setError([]);
-      } else{
-        if(!error.includes("skill already exist")){
-          setError([...error, "skill already exist"]);
-          setLevel();
+    if (!isUpdate) {
+      if (skill && level) {
+        if (skills.filter((s) => s.skill === skill).length < 1) {
+          setSkills([
+            ...skills,
+            { id: id, skill: skill, level: parseInt(level) },
+          ]);
           setSkill("");
-        }else{
-          setError([])
+          setLevel("");
+          setId((prev) => prev + 1);
+          setError([]);
+        } else {
+          if (!error.includes("skill already exist")) {
+            setError([...error, "skill already exist"]);
+            setLevel();
+            setSkill("");
+          } else {
+            setError([]);
+          }
         }
       }
+    } else {
+      setSkills([...skills]);
     }
   };
   const handleRemoveSkill = (skillName) => {
     setSkills([...skills.filter((s) => s.skill !== skillName)]);
-    setError([])
+    setError([]);
+  };
+  const handleUpdate = (s) => {
+    setId(s?.id);
+    setSkill(s?.skill);
+    setLevel(s?.level);
+    setIsUpdate(true);
   };
   sendData(skills);
   console.log(skills);
@@ -73,12 +89,12 @@ const Skills = ({ sendData }) => {
             <span>
               <FiPlus />
             </span>
-            <span>Add Skill</span>
+            {isUpdate ? <span>update Skill</span> : <span>add skill</span>}
           </button>
           <ul className="errors-list">
-             {error.map((err,index)=>(
+            {error.map((err, index) => (
               <li key={index}>{err}</li>
-             ))}
+            ))}
           </ul>
           <div className="skills-list">
             {skills?.map((s, index) => (
@@ -91,6 +107,14 @@ const Skills = ({ sendData }) => {
                     }}
                   >
                     <FaTimesCircle />
+                  </button>
+                  <button
+                    className="text-success"
+                    onClick={() => {
+                      handleUpdate(s);
+                    }}
+                  >
+                    <FaRegEdit />
                   </button>
                 </div>
                 <div
