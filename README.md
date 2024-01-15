@@ -1,22 +1,9 @@
+npm install @mui/material @emotion/react @emotion/styled
 
-.language-input {
-  display: flex;
-  gap: 20px;
-    }
-.language-form{
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-.language-input label {
-    font-size: 20px;
-    width: 150px;
-    }
-.language-input select {
-    
-    padding: 5px 15px;
-    font-size: 15px;
-    border-radius: 10px;
+npm install react-google-autocomplete
+npm install @mui/x-date-pickers
 
+npm install dayjs
 
-  }
+npm install @mui/material @emotion/react @emotion/styled
+npm install @mui/styled-engine-sc styled-components

@@ -1,19 +1,16 @@
 import React from "react";
-import "./Display.css"
+import "./Display.css";
 const EducationItemDisplay = ({
   education,
   handleRemove,
-  handleUpdateEducation,
+  handleUpdate,
 }) => {
- 
-
   return (
     <>
       <div className="item-education" key={education.id}>
-       {/*  <h6>{education.school}</h6>
-        <h6>{education.degree}</h6> */}
-        <h6>{education.study}</h6>
         
+        <h6>{education.study}</h6>
+
         <div className="buttonsDiv">
           <button
             className="removebutton"
@@ -23,7 +20,7 @@ const EducationItemDisplay = ({
           </button>
           <button
             className="updatebutton"
-            onClick={() => handleUpdateEducation(education)}
+            onClick={() => handleUpdate(education)}
           >
             Update
           </button>
