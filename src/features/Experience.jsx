@@ -1,50 +1,94 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable no-unused-vars */
 import React from "react";
 import { useState } from "react";
 import { FiPlus } from "react-icons/fi";
 import { FaChevronDown } from "react-icons/fa";
-const Experience = ({sendData}) => {
-  const [experiences, setExperiences] = useState([]);
-  const [company, setCompany] = useState("");
-  const [role, setRole] = useState("");
-  const [location, setLocation] = useState("");
-  const [workType, setWorkType] = useState("");
-  const [contract, setContract] = useState("");
-  const [startDate, SetStartDate] = useState("");
-const [endDate, setEndDate] = useState("");
+import { useRef } from "react";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import EducationItemDisplay from "../components/EducationItemDisplay";
+import Button from "@mui/material/Button";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import useFormValidation from "./FormValidation";
 
+// eslint-disable-next-line react/prop-types
+const Experience = ({ sendData }) => {
+  let IsValid = false;
 
+  const [isUpdate, setIsUpdate] = useState(false);
 
-  function handleExperiences(e) {
-    e.preventDefault();
-    setExperiences([
-      ...experiences,
-      {
-        company: company,
-        role: role,
-        location: location,
-        workType: workType,
-        contract: contract,
-        startDate: startDate,
-        endDate: endDate,
-      },
+  const LoadData = () => {
+    if (!isUpdate) setExperience([...experience, values]);
+    return isUpdate;
+  };
+
+  const SetIsUpdate = (experience) => {
+    setExperience(
+      experience.map((ed) => {
+         
+        return ed.id == experience.id
+          ? {
+              id: experience.id,
+              company: experience.company,
+              role: experience.role,
+              location: experience.location,
+              workType: experience.workType,
+              startDate: experience.startDate,
+              endDate: experience.endDate,
+            }
+          : ed;
+      })
+    );
+    setIsUpdate(false);
+  };
+  const {
+    values,
+    errors,
+    handleChange,
+    handleSubmit,
+    handleChangeDatePicker,
+    handleUpdate,
+  } = useFormValidation(
+    {
+      id: Date.now(),
+      company: "",
+      role: "",
+      location: "",
+      workType: "",
+      startDate: "",
+      endDate: "",
+    },
+    LoadData,
+    SetIsUpdate
+  );
+
+  const [experience, setExperience] = useState([]);
+  const [educationToUpdate, seteExperienceToUpdate] = useState({});
+
+  const handleRemove = (educationToRemove) => {
+    setExperience([
+      ...experience.filter(
+        (education) => education.id !== educationToRemove.id
+      ),
     ]);
-    setCompany("");
-    setRole("");
-    setLocation("");
-    setWorkType("");
-    setContract("");
-    SetStartDate("");
-    setEndDate("");
-  }
+  };
+
+  const handleUpdateExperience = (educationToUpdate) => {
+    seteExperienceToUpdate(educationToUpdate);
+    setIsUpdate(true);
+  };
 
   const [isHide, setIsHide] = useState(true);
-sendData(experiences);
-console.log(experiences);
+
+  sendData(experience);
+
   return (
     <>
-      <section className="experiences-section">
+      <section className="education-section">
         <div className="section-heading" onClick={() => setIsHide(!isHide)}>
           <h1>Experience</h1>
           <button style={{ border: "none", background: "transparent" }}>
@@ -52,107 +96,112 @@ console.log(experiences);
           </button>
         </div>
         {!isHide && (
-          <form onSubmit={handleExperiences}>
+          <Box className="form-box" component="form" onSubmit={handleSubmit}>
             <div className="d-flex flex-wrap gap-3 justify-content-start align-items-end">
-            <div className="mb-3">
-              <label>Company name</label>
-              <input
-                type="text"
-                placeholder="Ex: Atos "
-                value={company}
-                onChange={(e) => {
-                  setCompany(e.target.value);
-                }}
-              />
+              <div className="mb-3" style={{ width: "30%" }}>
+                <TextField
+                  id="company"
+                  label="company"
+                  variant="outlined"
+                  value={values.company}
+                  onChange={handleChange}
+                  error={errors.company}
+                  helperText={errors.company}
+                />
+              </div>
+              <div className="mb-3" style={{ width: "30%" }}>
+                <TextField
+                  id="role"
+                  label="role"
+                  variant="outlined"
+                  value={values.role}
+                  onChange={handleChange}
+                  error={errors.role}
+                  helperText={errors.role}
+                />
+              </div>
+              <div className="mb-3" style={{ width: "30%" }}>
+                <TextField
+                  id="location"
+                  label="location"
+                  variant="outlined"
+                  value={values.location}
+                  onChange={handleChange}
+                  error={errors.location}
+                  helperText={errors.location}
+                />
+              </div>
+              <div className="mb-3" style={{ width: "30%" }}>
+                <TextField
+                  id="workType"
+                  label="workType"
+                  variant="outlined"
+                  value={values.workType}
+                  onChange={handleChange}
+                  error={errors.workType}
+                  helperText={errors.workType}
+                />
+              </div>
+              <div className="mb-3">
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DatePicker
+                    id="statDate"
+                    value={values.startDate}
+                    onChange={(date) =>
+                      handleChangeDatePicker(date, "startDate")
+                    }
+                    label="Start date"
+                    slotProps={{
+                      textField: {
+                        variant: "outlined",
+                        error: errors.startDate,
+                        helperText: errors.startDate,
+                      },
+                    }}
+                  />
+                </LocalizationProvider>
+              </div>
+              <div className="mb-3">
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DatePicker
+                    id="graduationDate"
+                    value={values.endDate}
+                    onChange={(date) =>
+                      handleChangeDatePicker(date, "graduationDate")
+                    }
+                    label="Graduation Date"
+                    slotProps={{
+                      textField: {
+                        variant: "outlined",
+                        error: errors.endDate,
+                        helperText: errors.endDate,
+                      },
+                    }}
+                  />
+                </LocalizationProvider>
+              </div>
             </div>
-
-            <div className="mb-3">
-              <label>Role </label>
-              <input
-                type="text"
-                placeholder="Ex: Full-stack Developer "
-                value={role}
-                onChange={(e) => {
-                  setRole(e.target.value);
-                }}
-              />
-            </div>
-
-            <div className="mb-3">
-              <label>Location </label>
-              <input
-                type="text"
-                placeholder="Ex: Kenitra, Morocco "
-                value={location}
-                onChange={(e) => {
-                  setLocation(e.target.value);
-                }}
-              />
-            </div>
-
-            <div className="mb-3">
-              <label>Type </label>
-              <input
-                type="text"
-                placeholder="Ex: Remote , Hybrid, Site "
-                value={workType}
-                onChange={(e) => {
-                  setWorkType(e.target.value);
-                }}
-              />
-            </div>
-
-            <div className="mb-3">
-              <label>Contract </label>
-              <input
-                type="text"
-                placeholder="Ex: Full-Time , Part-Time, Intership "
-                value={contract}
-                onChange={(e) => {
-                  setContract(e.target.value);
-                }}
-              />
-            </div>
-
-            <div className="mb-3">
-              <label>Start date</label>
-              <input
-                type="date"
-                id="date"
-                value={startDate}
-                onChange={(e) => {
-                  SetStartDate(e.target.value);
-                }}
-              />
-            </div>
-
-            <div className="mb-3">
-              <label>End date</label>
-              <input
-                type="date"
-                id="date"
-                value={endDate}
-                onChange={(e) => {
-                  setEndDate(e.target.value);
-                }}
-              />
-            </div>
-            </div>
-            <button className="add-btn" type="submit">
+            <button type="submit" className="add-btn">
               <span>
                 <FiPlus />
               </span>
-              <span>Add Experience</span>
+              {isUpdate ? (
+                <span>Update Experience </span>
+              ) : (
+                <span>Add Experience </span>
+              )}
             </button>
-          </form>
+          </Box>
         )}
-            <div className="experiences-list">
-              {experiences.map((exper, index) => (
-                <div key={index}>
-                  {exper.role} 
-                </div>
-              ))}
-            </div>
+        <div className="educations-list">
+          {experience.map((e) => (
+            <EducationItemDisplay
+              handleRemove={(a) => handleRemove(a)}
+              handleUpdate={(a) => handleUpdateExperience(handleUpdate(a))}
+              education={e}
+            />
+          ))}
+        </div>
       </section>
     </>
   );

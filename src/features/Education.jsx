@@ -22,10 +22,26 @@ const Education = ({ sendData }) => {
   const [isUpdate, setIsUpdate] = useState(false);
   
      const LoadData = () => {
-       setEducations([...educations, values]);
+      if (!isUpdate) setEducations([...educations, values]);
+      return isUpdate;
      }; 
 
-    const SetIsUpdate = () => {
+    const SetIsUpdate = (education) => {
+       setEducations(
+            educations.map((ed) => {
+               console.log("tttttt", ed.id == education.id);
+              return ed.id == education.id
+                ? {
+                    id: education.id,
+                    school: education.school,
+                    degree: education.degree,
+                    study: education.study,
+                    startDate: education.startDate,
+                    graduationDate: education.graduationDate,
+                  }
+                : ed;
+            })
+          );
       setIsUpdate(false);
     };  
    const {
@@ -35,6 +51,8 @@ const Education = ({ sendData }) => {
      handleSubmit,
      handleChangeDatePicker,
      handleUpdate,
+     
+     
    } = useFormValidation(
      {
        id: Date.now(),
@@ -67,29 +85,6 @@ const Education = ({ sendData }) => {
     
      seteEducationToUpdate(educationToUpdate);
      setIsUpdate(true);
-
-
-     setEducations(
-          educations.map((ed) => {
-            /* console.log("aaa", ed.id == educationToUpdate.id); */
-            return ed.id == educationToUpdate.id
-              ? {
-                  id: educationToUpdate.id,
-                  school: school,
-                  degree: degree,
-                  study: study,
-                  startDate: startDate,
-                  graduationDate: graduationDate,
-                }
-              : ed;
-          })
-        );
-          
-         
-        
-
-         
-       
    };
       
   const [isHide, setIsHide] = useState(true);
@@ -164,24 +159,22 @@ const Education = ({ sendData }) => {
               <div className="mb-3">
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DatePicker
-                    id="graduationDate"
+                    id="endDate"
                     value={values.graduationDate}
-                    onChange={(date) =>
-                      handleChangeDatePicker(date, "graduationDate")
-                    }
+                    onChange={(date) => handleChangeDatePicker(date, "endDate")}
                     label="Graduation Date"
                     slotProps={{
                       textField: {
                         variant: "outlined",
-                        error: errors.graduationDate,
-                        helperText: errors.graduationDate,
+                        error: errors.endDate,
+                        helperText: errors.endDate,
                       },
                     }}
                   />
                 </LocalizationProvider>
               </div>
             </div>
-            <button type="submit" className="add-btn"  >
+            <button type="submit" className="add-btn">
               <span>
                 <FiPlus />
               </span>

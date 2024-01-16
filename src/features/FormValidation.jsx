@@ -4,7 +4,7 @@ const useFormValidation = (object, callback, SetIsUpdate) => {
   const [values, setValues] = useState(object);
   const [errors, setErrors] = useState({});
 
-  const validate = () => {
+  const validateEducationAdd = () => {
     let newErrors = {};
 
     if (!values.school.trim()) {
@@ -21,8 +21,8 @@ const useFormValidation = (object, callback, SetIsUpdate) => {
       newErrors.startDate = "Start date is required";
     }
 
-    if (values.graduationDate === "") {
-      newErrors.graduationDate = "Graduation date is required";
+    if (values.endDate === "") {
+      newErrors.endDate = "Graduation date is required";
     }
 
     setErrors(newErrors);
@@ -34,7 +34,7 @@ const useFormValidation = (object, callback, SetIsUpdate) => {
     let newErrors = {};
     const d = date?.$d.toLocaleDateString("en-US");
     if (d.length > 0) {
-      if (id !== "graduationDate") {
+      if (id !== "endDate") {
         setValues({
           ...values,
           [id]: d,
@@ -46,9 +46,9 @@ const useFormValidation = (object, callback, SetIsUpdate) => {
             [id]: d,
           });
 
-          newErrors.graduationDate = "";
+          newErrors.endDate = "";
         } else {
-          newErrors.graduationDate = d + " is less than " + values.startDate;
+          newErrors.endDate = d + " is less than " + values.startDate;
         }
       }
       setErrors(newErrors);
@@ -77,15 +77,18 @@ const useFormValidation = (object, callback, SetIsUpdate) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (validate()) {
-      callback();
-      SetIsUpdate();
+    if (true) {
+      let isUpdate = callback();
+      if (isUpdate) {
+        SetIsUpdate(values);
+      }
       setValues(object);
       // console.log("Form submitted:", values);
     }
   };
 
   const handleUpdate = (objToUpdate) => {
+    values.id = objToUpdate.id;
     values.school = objToUpdate.school;
     values.degree = objToUpdate.degree;
     values.study = objToUpdate.study;
