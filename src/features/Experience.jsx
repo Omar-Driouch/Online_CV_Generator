@@ -8,7 +8,7 @@ import { FaChevronDown } from "react-icons/fa";
 import { useRef } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import EducationItemDisplay from "../components/EducationItemDisplay";
+import ExperienceItemDisplay from "../components/ExperienceItemDisplay";
 import Button from "@mui/material/Button";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -26,19 +26,21 @@ const Experience = ({ sendData }) => {
     return isUpdate;
   };
 
-  const SetIsUpdate = (experience) => {
+  const SetIsUpdate = (obj) => {
+    console.log("====================================");
+    console.log(obj);
+    console.log("====================================");
     setExperience(
       experience.map((ed) => {
-         
-        return ed.id == experience.id
+        return ed.id == obj.id
           ? {
-              id: experience.id,
-              company: experience.company,
-              role: experience.role,
-              location: experience.location,
-              workType: experience.workType,
-              startDate: experience.startDate,
-              endDate: experience.endDate,
+              id: obj.id,
+              company: obj.company,
+              role: obj.role,
+              location: obj.location,
+              workType: obj.workType,
+              startDate: obj.startDate,
+              endDate: obj.endDate,
             }
           : ed;
       })
@@ -51,7 +53,7 @@ const Experience = ({ sendData }) => {
     handleChange,
     handleSubmit,
     handleChangeDatePicker,
-    handleUpdate,
+    handleUpdatExperience,
   } = useFormValidation(
     {
       id: Date.now(),
@@ -63,7 +65,8 @@ const Experience = ({ sendData }) => {
       endDate: "",
     },
     LoadData,
-    SetIsUpdate
+    SetIsUpdate,
+    "Experience"
   );
 
   const [experience, setExperience] = useState([]);
@@ -164,12 +167,10 @@ const Experience = ({ sendData }) => {
               <div className="mb-3">
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DatePicker
-                    id="graduationDate"
+                    id="endDate"
                     value={values.endDate}
-                    onChange={(date) =>
-                      handleChangeDatePicker(date, "graduationDate")
-                    }
-                    label="Graduation Date"
+                    onChange={(date) => handleChangeDatePicker(date, "endDate")}
+                    label="End Date"
                     slotProps={{
                       textField: {
                         variant: "outlined",
@@ -195,10 +196,12 @@ const Experience = ({ sendData }) => {
         )}
         <div className="educations-list">
           {experience.map((e) => (
-            <EducationItemDisplay
+            <ExperienceItemDisplay
               handleRemove={(a) => handleRemove(a)}
-              handleUpdate={(a) => handleUpdateExperience(handleUpdate(a))}
-              education={e}
+              handleUpdate={(a) =>
+                handleUpdateExperience(handleUpdatExperience(a))
+              }
+              experience={e}
             />
           ))}
         </div>

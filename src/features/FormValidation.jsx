@@ -1,30 +1,55 @@
 import { useState } from "react";
 
-const useFormValidation = (object, callback, SetIsUpdate) => {
+const useFormValidation = (object, callback, SetIsUpdate, ComponentName) => {
   const [values, setValues] = useState(object);
   const [errors, setErrors] = useState({});
 
   const validateEducationAdd = () => {
     let newErrors = {};
 
-    if (!values.school.trim()) {
-      newErrors.school = "school is required";
-    }
-    if (!values.degree.trim()) {
-      newErrors.degree = "degree is required";
-    }
-    if (!values.study.trim()) {
-      newErrors.study = "field of study is required";
+    if (ComponentName === "Education") {
+      if (!values.school.trim()) {
+        newErrors.school = "school is required";
+      }
+      if (!values.degree.trim()) {
+        newErrors.degree = "degree is required";
+      }
+      if (!values.study.trim()) {
+        newErrors.study = "field of study is required";
+      }
+
+      if (values.startDate === "") {
+        newErrors.startDate = "Start date is required";
+      }
+
+      if (values.endDate === "") {
+        newErrors.endDate = "End date is required";
+      }
     }
 
-    if (values.startDate === "") {
-      newErrors.startDate = "Start date is required";
-    }
+    if (ComponentName === "Experience") {
+      if (!values.company.trim()) {
+        newErrors.company = "company is required";
+      }
+      if (!values.role.trim()) {
+        newErrors.role = "role is required";
+      }
+      if (!values.location.trim()) {
+        newErrors.location = "location is required";
+      }
 
-    if (values.endDate === "") {
-      newErrors.endDate = "Graduation date is required";
-    }
+      if (!values.workType.trim()) {
+        newErrors.workType = "Work Type is required";
+      }
 
+      if (values.startDate === "") {
+        newErrors.startDate = "Start date is required";
+      }
+
+      if (values.endDate === "") {
+        newErrors.endDate = "End date date is required";
+      }
+    }
     setErrors(newErrors);
 
     return Object.keys(newErrors).length === 0;
@@ -77,7 +102,7 @@ const useFormValidation = (object, callback, SetIsUpdate) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (true) {
+    if (validateEducationAdd()) {
       let isUpdate = callback();
       if (isUpdate) {
         SetIsUpdate(values);
@@ -87,11 +112,20 @@ const useFormValidation = (object, callback, SetIsUpdate) => {
     }
   };
 
-  const handleUpdate = (objToUpdate) => {
+  const handleUpdatEducation = (objToUpdate) => {
     values.id = objToUpdate.id;
     values.school = objToUpdate.school;
     values.degree = objToUpdate.degree;
     values.study = objToUpdate.study;
+    return values;
+  };
+
+  const handleUpdatExperience = (objToUpdate) => {
+    values.id = objToUpdate.id;
+    values.company = objToUpdate.company;
+    values.role = objToUpdate.role;
+    values.location = objToUpdate.location;
+    values.workType = objToUpdate.workType;
     return values;
   };
 
@@ -101,7 +135,8 @@ const useFormValidation = (object, callback, SetIsUpdate) => {
     handleChange,
     handleChangeDatePicker,
     handleSubmit,
-    handleUpdate,
+    handleUpdatEducation,
+    handleUpdatExperience,
   };
 };
 

@@ -29,7 +29,7 @@ const Education = ({ sendData }) => {
     const SetIsUpdate = (education) => {
        setEducations(
             educations.map((ed) => {
-               console.log("tttttt", ed.id == education.id);
+               
               return ed.id == education.id
                 ? {
                     id: education.id,
@@ -37,7 +37,7 @@ const Education = ({ sendData }) => {
                     degree: education.degree,
                     study: education.study,
                     startDate: education.startDate,
-                    graduationDate: education.graduationDate,
+                    endDate: education.endDate,
                   }
                 : ed;
             })
@@ -50,9 +50,7 @@ const Education = ({ sendData }) => {
      handleChange,
      handleSubmit,
      handleChangeDatePicker,
-     handleUpdate,
-     
-     
+     handleUpdatEducation,
    } = useFormValidation(
      {
        id: Date.now(),
@@ -60,10 +58,11 @@ const Education = ({ sendData }) => {
        degree: "",
        study: "",
        startDate: "",
-       graduationDate: "",
+       endDate: "",
      },
      LoadData,
-     SetIsUpdate
+     SetIsUpdate,
+     "Education"
    );
 
 
@@ -160,7 +159,7 @@ const Education = ({ sendData }) => {
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DatePicker
                     id="endDate"
-                    value={values.graduationDate}
+                    value={values.endDate}
                     onChange={(date) => handleChangeDatePicker(date, "endDate")}
                     label="Graduation Date"
                     slotProps={{
@@ -190,7 +189,9 @@ const Education = ({ sendData }) => {
           {educations.map((e) => (
             <EducationItemDisplay
               handleRemove={(a) => handleRemove(a)}
-              handleUpdate={(a) => handleUpdateEducation(handleUpdate(a))}
+              handleUpdate={(a) =>
+                handleUpdateEducation(handleUpdatEducation(a))
+              }
               education={e}
             />
           ))}
