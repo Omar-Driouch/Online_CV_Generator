@@ -4,11 +4,11 @@ import ReactToPrint from "react-to-print";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Personalinfo from "./features/PersonalInfo";
-import Education from "./features/Education";
-import Skills from "./features/Skills";
+import Education from "./components/Education/Education";
+import Skills from "./components/Skills/Skills";
 import References from "./features/References";
-import Experience from "./features/Experience";
-import Language from "./features/Language";
+import Experience from "./components/Experience/Experience";
+import Language from "./components/Language/Language";
 import Preview from "./components/Preview/Preview";
 
 function App() {
@@ -44,7 +44,7 @@ function App() {
   return (
     <div className="container-app">
       <Header />
-      <ReactToPrint
+      {/* <ReactToPrint
         pageStyle={{ padding: "0", marging: "0" }}
         trigger={() => (
           <button className="border-0 text-light fw-bold rounded-1 m-3 bg-primary py-2 px-5">
@@ -52,7 +52,7 @@ function App() {
           </button>
         )}
         content={() => printRef.current}
-      />
+      /> */}
       <main>
         <div className="sections-container">
           <Personalinfo sendData={(info) => handleReceivePersonnalInfo(info)} />

@@ -8,12 +8,12 @@ import { FaChevronDown } from "react-icons/fa";
 import { useRef } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import EducationItemDisplay from "../components/EducationItemDisplay";
+import EducationItemDisplay from "./EducationItemDisplay";
 import Button from "@mui/material/Button";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import useFormValidation from "./FormValidation";
+import useFormValidation from "../../features/FormValidation";
 
 // eslint-disable-next-line react/prop-types
 const Education = ({ sendData }) => {

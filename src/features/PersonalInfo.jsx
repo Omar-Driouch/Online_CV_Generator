@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { FaChevronDown } from "react-icons/fa";
 import {BiImageAdd} from "react-icons/bi";
+import Avatar from "@mui/material/Avatar";
+import Stack from "@mui/material/Stack";
 
 const PersonalInfo = ({sendData}) => {
    
@@ -58,7 +60,9 @@ const PersonalInfo = ({sendData}) => {
           <div className="d-flex flex-wrap gap-3 justify-content-start align-items-end">
             <div className="mb-3 img-box">
               <label className="img-label" htmlFor="image">
-                <BiImageAdd />
+                <Stack direction="row" spacing={2}>
+                  <Avatar alt="Travis Howard" src={image} />
+                </Stack>
               </label>
               <input
                 type="file"
@@ -66,13 +70,11 @@ const PersonalInfo = ({sendData}) => {
                 accept="image/*"
                 onChange={handleChangeImage}
               />
-              {image && <img src={image} alt="#" />}
             </div>
             <div className="mb-3">
               <label htmlFor="nom">Last Name</label>
               <input
                 type="text"
-                
                 placeholder="entrer votre nom .."
                 value={nom}
                 onChange={(e) => {

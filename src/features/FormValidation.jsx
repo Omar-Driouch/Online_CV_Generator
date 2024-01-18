@@ -61,6 +61,14 @@ const useFormValidation = (object, callback, SetIsUpdate, ComponentName) => {
        }
        
      }
+      if (ComponentName === "Skill") {
+        if (!values.skill.trim()) {
+          newErrors.skill = "Skill is required";
+        }
+        if (!values.level.trim()) {
+          newErrors.level = "level is required";
+        }
+      }
     setErrors(newErrors);
 
     return Object.keys(newErrors).length === 0;
@@ -137,11 +145,17 @@ const useFormValidation = (object, callback, SetIsUpdate, ComponentName) => {
     values.language = objToUpdate.language;
     values.level = objToUpdate.level;
 
-   
-    
-   
     return values;
   };
+
+  const handleUpdatSkills = (objToUpdate) => {
+    values.id = objToUpdate.id;
+    values.skill = objToUpdate.skill;
+    values.level = objToUpdate.level;
+
+    return values;
+  };
+
 
   const handleUpdatExperience = (objToUpdate) => {
     values.id = objToUpdate.id;
@@ -161,6 +175,7 @@ const useFormValidation = (object, callback, SetIsUpdate, ComponentName) => {
     handleUpdatEducation,
     handleUpdatExperience,
     handleUpdatLanguages,
+    handleUpdatSkills,
   };
 };
 

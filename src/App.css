@@ -86,7 +86,7 @@ label{
 }
 .img-box{
     position: relative;
-    width: 150px;
+    width: 50px;
     margin: 20px;
 }
 .img-box img{
@@ -112,8 +112,8 @@ label{
     border-radius: 5px;
     cursor: pointer;
     border: 2px dashed #619699;
-    width: 150px;
-    height: 150px;
+    width: 50px;
+    height: 50px;
     display: block;
     text-align: center;
     line-height: 120px;
