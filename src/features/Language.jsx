@@ -1,24 +1,96 @@
 import { useState } from "react";
 import { FiPlus } from "react-icons/fi";
 import { FaChevronDown, FaTimesCircle } from "react-icons/fa";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import FormHelperText from "@mui/material/FormHelperText";
+import useFormValidation from "./FormValidation";
 
-const Language = ({sendData}) => {
+const Language = ({ sendData }) => {
   const [languages, setLanguages] = useState([]);
-  const [language, setLanguage] = useState("Arabic");
-  const [level, setLevel] = useState("Native");
+   const [language, setLanguage] = useState("Arabic");
+   const [level, setLevel] = useState("Native");
   const [isHide, setIsHide] = useState(true);
+  const [SelectedLanguage, setSelectedLanguage] = useState(true);
+  const [SelectedLevel, setSelectedLevel] = useState(true);
 
-  const handleAddLanguage = () => {
+  const Levels = {
+    Beginner: "Beginner",
+    Intermediate: "Intermediate",
+    Advanced: "Advanced",
+    Native: "Native",
+  };
+
+  const Languages = {
+    Arabic: "Arabic",
+    English: "English",
+    French: "French",
+    Spanish: "Spanish",
+    Russian: "Russian",
+    Portuguese: "Portuguese",
+    Italian: "Italian",
+    Japaneses: "Japaneses",
+  };
+
+const LoadData = () => {
+  if (!isUpdate) setExperience([...experience, values]);
+  return isUpdate;
+};
+
+const SetIsUpdate = (obj) => {
+  console.log("====================================");
+  console.log(obj);
+  console.log("====================================");
+   
+};
+  const {
+    values,
+    errors,
+    handleChange,
+    handleSubmit,
+    handleChangeDatePicker,
+    handleUpdatExperience,
+  } = useFormValidation(
+    {
+      id: Date.now(),
+      language: "",
+      level: "",
+      
+    },
+    LoadData,
+    SetIsUpdate,
+    "Language"
+  );
+
+
+
+
+   const handleAddLanguage = () => {
     setLanguages([
       ...languages,
       {
-        language: language,
-        level: level,
+        language: SelectedLanguage,
+        level: SelectedLevel,
       },
     ]);
+    sendData(languages);
+    console.log(languages);
   };
-   sendData(languages);
-   console.log(languages)
+
+  const handleOnChangeLanguage = (e) => {
+
+    setSelectedLanguage(e.target.value);
+    setLanguage(SelectedLanguage)
+  };
+
+  const handleOnChangeLevel = (e) => {
+    setSelectedLevel(e.target.value);
+  };
+
+  
+  
   return (
     <section className="languages-section">
       <div className="section-heading" onClick={() => setIsHide(!isHide)}>
@@ -29,37 +101,44 @@ const Language = ({sendData}) => {
       </div>
       {!isHide && (
         <div className="language-form">
-            <div className="d-flex flex-wrap my-3 gap-5 justify-content-start align-items-end">
-          <div className="language-input">
-            <label htmlFor="language">Language:</label>
-            <select
-              id="language"
-              name="language"
-              onChange={(e) => setLanguage(e.target.value)}
+          <FormControl sx={{ m: 1, minWidth: 250 }}>
+            <InputLabel id="language-name">Language</InputLabel>
+            <Select
+              labelId="language-name"
+              id="language-name"
+              value={SelectedLanguage}
+              label="Language-"
+              placeholder="Language"
+              error={""}
+              onChange={handleOnChangeLanguage}
             >
-              <option value="Arabic">Arabic</option>
-              <option value="English">English</option>
-              <option value="Spanish">Spanish</option>
-              <option value="French">French</option>
-              {/* Add more language options as needed */}
-            </select>
-          </div>
-
-          <div className="language-input">
-            <label htmlFor="language_level">Level:</label>
-            <select
-              id="language_level"
-              name="language_level"
-              onChange={(e) => setLevel(e.target.value)}
+              <MenuItem value={Languages.Arabic}>Arabic</MenuItem>
+              <MenuItem value={Languages.English}>English</MenuItem>
+              <MenuItem value={Languages.French}>French</MenuItem>
+              <MenuItem value={Languages.Spanish}>Spanish</MenuItem>
+              <MenuItem value={Languages.Portuguese}>Portuguese</MenuItem>
+              <MenuItem value={Languages.Italian}>Italian</MenuItem>
+              <MenuItem value={Languages.Japaneses}>Japaneses</MenuItem>
+            </Select>
+            <FormHelperText>generate Errors here</FormHelperText>
+          </FormControl>
+          <FormControl sx={{ m: 1, minWidth: 250 }}>
+            <InputLabel id="Level-name">Level</InputLabel>
+            <Select
+              labelId="Level-name"
+              id="Level-name"
+              value={SelectedLevel}
+              label="Level-"
+              placeholder="Level"
+              onChange={handleOnChangeLevel}
             >
-              <option value="Beginner">Beginner</option>
-              <option value="Intermediate">Intermediate</option>
-              <option value="Advanced">Advanced</option>
-              <option value="Native">Native</option>
-              {/* Add more level options as needed */}
-            </select>
-          </div>
-          </div>
+              <MenuItem value={Levels.Beginner}>Beginner</MenuItem>
+              <MenuItem value={Levels.Intermediate}>Intermediate</MenuItem>
+              <MenuItem value={Levels.Advanced}>Advanced</MenuItem>
+              <MenuItem value={Levels.Native}>Native</MenuItem>
+            </Select>
+            <FormHelperText>Level generate Errors here</FormHelperText>
+          </FormControl>
           <button className="add-btn" onClick={handleAddLanguage}>
             <span>
               <FiPlus />
@@ -68,21 +147,21 @@ const Language = ({sendData}) => {
           </button>
         </div>
       )}
-          <div className="component-list">
-            {languages?.map((l, index) => (
-              <div className="item" key={index}>
-                <div className="component_item">
-                  <span>
-                    {" "}
-                    {l.language} - {l.level}
-                  </span>
-                  <button>
-                    <FaTimesCircle />
-                  </button>
-                </div>               
-              </div>
-            ))}
+      <div className="component-list">
+        {languages?.map((l, index) => (
+          <div className="item" key={index}>
+            <div className="component_item">
+              <span>
+                {" "}
+                {l.language} - {l.level}
+              </span>
+              <button>
+                <FaTimesCircle />
+              </button>
+            </div>
           </div>
+        ))}
+      </div>
     </section>
   );
 };
