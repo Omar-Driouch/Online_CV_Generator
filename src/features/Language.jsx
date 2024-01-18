@@ -1,50 +1,47 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-mixed-spaces-and-tabs */
+/* eslint-disable no-unused-vars */
+import React from "react";
 import { useState } from "react";
 import { FiPlus } from "react-icons/fi";
-import { FaChevronDown, FaTimesCircle } from "react-icons/fa";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import FormHelperText from "@mui/material/FormHelperText";
+import { FaChevronDown } from "react-icons/fa";
+import { useRef } from "react";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import LanguageItemDisplay from "../components/LanguageItemDisplay";
+import Button from "@mui/material/Button";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import useFormValidation from "./FormValidation";
 
+// eslint-disable-next-line react/prop-types
 const Language = ({ sendData }) => {
-  const [languages, setLanguages] = useState([]);
-   const [language, setLanguage] = useState("Arabic");
-   const [level, setLevel] = useState("Native");
-  const [isHide, setIsHide] = useState(true);
-  const [SelectedLanguage, setSelectedLanguage] = useState(true);
-  const [SelectedLevel, setSelectedLevel] = useState(true);
+  let IsValid = false;
 
-  const Levels = {
-    Beginner: "Beginner",
-    Intermediate: "Intermediate",
-    Advanced: "Advanced",
-    Native: "Native",
+  const [isUpdate, setIsUpdate] = useState(false);
+
+  const LoadData = () => {
+    if (!isUpdate) setExperience([...experience, values]);
+    return isUpdate;
   };
 
-  const Languages = {
-    Arabic: "Arabic",
-    English: "English",
-    French: "French",
-    Spanish: "Spanish",
-    Russian: "Russian",
-    Portuguese: "Portuguese",
-    Italian: "Italian",
-    Japaneses: "Japaneses",
+  const SetIsUpdate = (obj) => {
+    
+    setExperience(
+      experience.map((ed) => {
+        
+        return ed.id == obj.id
+          ? {
+              id: obj.id,
+              language: obj.language,
+              level: obj.level,
+            }
+          : ed;
+      })
+    );
+    setIsUpdate(false);
   };
-
-const LoadData = () => {
-  if (!isUpdate) setExperience([...experience, values]);
-  return isUpdate;
-};
-
-const SetIsUpdate = (obj) => {
-  console.log("====================================");
-  console.log(obj);
-  console.log("====================================");
-   
-};
   const {
     values,
     errors,
@@ -52,117 +49,98 @@ const SetIsUpdate = (obj) => {
     handleSubmit,
     handleChangeDatePicker,
     handleUpdatExperience,
+    handleUpdatLanguages,
   } = useFormValidation(
     {
       id: Date.now(),
       language: "",
       level: "",
-      
     },
     LoadData,
     SetIsUpdate,
     "Language"
   );
 
+  const [experience, setExperience] = useState([]);
+  const [educationToUpdate, seteExperienceToUpdate] = useState({});
 
-
-
-   const handleAddLanguage = () => {
-    setLanguages([
-      ...languages,
-      {
-        language: SelectedLanguage,
-        level: SelectedLevel,
-      },
+  const handleRemove = (educationToRemove) => {
+    setExperience([
+      ...experience.filter(
+        (education) => education.id !== educationToRemove.id
+      ),
     ]);
-    sendData(languages);
-    console.log(languages);
   };
 
-  const handleOnChangeLanguage = (e) => {
-
-    setSelectedLanguage(e.target.value);
-    setLanguage(SelectedLanguage)
+  const handleUpdateExperience = (educationToUpdate) => {
+    seteExperienceToUpdate(educationToUpdate);
+    setIsUpdate(true);
   };
 
-  const handleOnChangeLevel = (e) => {
-    setSelectedLevel(e.target.value);
-  };
+  const [isHide, setIsHide] = useState(true);
 
-  
-  
+  sendData(experience);
+
   return (
-    <section className="languages-section">
-      <div className="section-heading" onClick={() => setIsHide(!isHide)}>
-        <h1>Language</h1>
-        <button style={{ border: "none", background: "transparent" }}>
-          <FaChevronDown />
-        </button>
-      </div>
-      {!isHide && (
-        <div className="language-form">
-          <FormControl sx={{ m: 1, minWidth: 250 }}>
-            <InputLabel id="language-name">Language</InputLabel>
-            <Select
-              labelId="language-name"
-              id="language-name"
-              value={SelectedLanguage}
-              label="Language-"
-              placeholder="Language"
-              error={""}
-              onChange={handleOnChangeLanguage}
-            >
-              <MenuItem value={Languages.Arabic}>Arabic</MenuItem>
-              <MenuItem value={Languages.English}>English</MenuItem>
-              <MenuItem value={Languages.French}>French</MenuItem>
-              <MenuItem value={Languages.Spanish}>Spanish</MenuItem>
-              <MenuItem value={Languages.Portuguese}>Portuguese</MenuItem>
-              <MenuItem value={Languages.Italian}>Italian</MenuItem>
-              <MenuItem value={Languages.Japaneses}>Japaneses</MenuItem>
-            </Select>
-            <FormHelperText>generate Errors here</FormHelperText>
-          </FormControl>
-          <FormControl sx={{ m: 1, minWidth: 250 }}>
-            <InputLabel id="Level-name">Level</InputLabel>
-            <Select
-              labelId="Level-name"
-              id="Level-name"
-              value={SelectedLevel}
-              label="Level-"
-              placeholder="Level"
-              onChange={handleOnChangeLevel}
-            >
-              <MenuItem value={Levels.Beginner}>Beginner</MenuItem>
-              <MenuItem value={Levels.Intermediate}>Intermediate</MenuItem>
-              <MenuItem value={Levels.Advanced}>Advanced</MenuItem>
-              <MenuItem value={Levels.Native}>Native</MenuItem>
-            </Select>
-            <FormHelperText>Level generate Errors here</FormHelperText>
-          </FormControl>
-          <button className="add-btn" onClick={handleAddLanguage}>
-            <span>
-              <FiPlus />
-            </span>
-            <span>Add Language</span>
+    <>
+      <section className="education-section">
+        <div className="section-heading" onClick={() => setIsHide(!isHide)}>
+          <h1>Experience</h1>
+          <button style={{ border: "none", background: "transparent" }}>
+            <FaChevronDown />
           </button>
         </div>
-      )}
-      <div className="component-list">
-        {languages?.map((l, index) => (
-          <div className="item" key={index}>
-            <div className="component_item">
-              <span>
-                {" "}
-                {l.language} - {l.level}
-              </span>
-              <button>
-                <FaTimesCircle />
-              </button>
+        {!isHide && (
+          <Box className="form-box" component="form" onSubmit={handleSubmit}>
+            <div className="d-flex flex-wrap gap-3 justify-content-start align-items-end">
+              <div className="mb-3" style={{ width: "30%" }}>
+                <TextField
+                  id="language"
+                  label="language"
+                  variant="outlined"
+                  value={values.language}
+                  onChange={handleChange}
+                  error={errors.language}
+                  helperText={errors.language}
+                />
+              </div>
+              <div className="mb-3" style={{ width: "30%" }}>
+                <TextField
+                  id="level"
+                  label="level"
+                  variant="outlined"
+                  value={values.level}
+                  onChange={handleChange}
+                  error={errors.level}
+                  helperText={errors.level}
+                />
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
-    </section>
+            <button type="submit" className="add-btn">
+              <span>
+                <FiPlus />
+              </span>
+              {isUpdate ? (
+                <span>Update Experience </span>
+              ) : (
+                <span>Add Experience </span>
+              )}
+            </button>
+          </Box>
+        )}
+        <div className="educations-list">
+          {experience.map((e) => (
+            <LanguageItemDisplay
+              handleRemove={(a) => handleRemove(a)}
+              handleUpdate={(a) =>
+                handleUpdateExperience(handleUpdatLanguages(a))
+              }
+              experience={e}
+            />
+          ))}
+        </div>
+      </section>
+    </>
   );
 };
 

@@ -27,6 +27,7 @@ const useFormValidation = (object, callback, SetIsUpdate, ComponentName) => {
       }
     }
 
+
     if (ComponentName === "Experience") {
       if (!values.company.trim()) {
         newErrors.company = "company is required";
@@ -50,6 +51,16 @@ const useFormValidation = (object, callback, SetIsUpdate, ComponentName) => {
         newErrors.endDate = "End date date is required";
       }
     }
+
+     if (ComponentName === "Language") {
+       if (!values.language.trim()) {
+         newErrors.language = "language is required";
+       }
+       if (!values.level.trim()) {
+         newErrors.level = "level is required";
+       }
+       
+     }
     setErrors(newErrors);
 
     return Object.keys(newErrors).length === 0;
@@ -108,7 +119,7 @@ const useFormValidation = (object, callback, SetIsUpdate, ComponentName) => {
         SetIsUpdate(values);
       }
       setValues(object);
-      // console.log("Form submitted:", values);
+       console.log("Form submitted:", values);
     }
   };
 
@@ -117,6 +128,18 @@ const useFormValidation = (object, callback, SetIsUpdate, ComponentName) => {
     values.school = objToUpdate.school;
     values.degree = objToUpdate.degree;
     values.study = objToUpdate.study;
+    return values;
+  };
+
+  const handleUpdatLanguages = (objToUpdate) => {
+    
+    values.id = objToUpdate.id;
+    values.language = objToUpdate.language;
+    values.level = objToUpdate.level;
+
+   
+    
+   
     return values;
   };
 
@@ -137,6 +160,7 @@ const useFormValidation = (object, callback, SetIsUpdate, ComponentName) => {
     handleSubmit,
     handleUpdatEducation,
     handleUpdatExperience,
+    handleUpdatLanguages,
   };
 };
 
