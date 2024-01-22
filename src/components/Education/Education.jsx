@@ -13,7 +13,7 @@ import Button from "@mui/material/Button";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import useFormValidation from "../../features/FormValidation";
+import useFormValidation from "../../FormValidation";
 
 // eslint-disable-next-line react/prop-types
 const Education = ({ sendData }) => {

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import {SplitTostring}  from "./features/Helpers.js";
 
 const useFormValidation = (object, callback, SetIsUpdate, ComponentName) => {
   const [values, setValues] = useState(object);
@@ -6,6 +7,33 @@ const useFormValidation = (object, callback, SetIsUpdate, ComponentName) => {
 
   const validateEducationAdd = () => {
     let newErrors = {};
+
+    if (ComponentName === "Personalinfo") {
+      if (!values.firstName.trim()) {
+        newErrors.firstName = "first Name is required";
+      }
+      if (!values.lastName.trim()) {
+        newErrors.lastName = "last Name is required";
+      }
+      if (!values.email.trim()) {
+        newErrors.email = "Email of study is required";
+      }
+
+      if (values.phone === "") {
+        newErrors.phone = "Phone is required";
+      }
+
+      if (values.title === "") {
+        newErrors.title = "Title is required";
+      }
+      if (values.address === "") {
+        newErrors.address = "address is required";
+      }
+      if (values.description === "") {
+        newErrors.description = "description is required";
+      }
+    }
+
 
     if (ComponentName === "Education") {
       if (!values.school.trim()) {
@@ -68,11 +96,24 @@ const useFormValidation = (object, callback, SetIsUpdate, ComponentName) => {
         if (!values.level.trim()) {
           newErrors.level = "level is required";
         }
-      }
+    }
     setErrors(newErrors);
 
     return Object.keys(newErrors).length === 0;
   };
+
+    const handleChangeImage = (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const imageUrl = URL.createObjectURL(file);
+       
+        setValues({
+          ...values,
+          [e.target?.id]: imageUrl,
+        });
+      }
+    };
+
 
   const handleChangeDatePicker = (date, id) => {
     let newErrors = {};
@@ -109,7 +150,9 @@ const useFormValidation = (object, callback, SetIsUpdate, ComponentName) => {
 
       setErrors(newErrors);
     } else {
-      newErrors = { [e.target?.id]: [e.target?.id] + " is required" };
+      newErrors = {
+        [e.target?.id]: SplitTostring(e.target?.id ) + " is required",
+      };
       setErrors(newErrors);
       setValues({
         ...values,
@@ -130,6 +173,23 @@ const useFormValidation = (object, callback, SetIsUpdate, ComponentName) => {
        console.log("Form submitted:", values);
     }
   };
+
+
+  const handleUpdatPersonalInfo = (objToUpdate) => {
+    values.id = objToUpdate.id;
+    values.firstName = objToUpdate.firstName;
+    values.lastName = objToUpdate.lastName;
+    values.email = objToUpdate.email;
+    values.phone = objToUpdate.phone;
+    values.title = objToUpdate.title;
+    values.address = objToUpdate.address;
+    values.description = objToUpdate.description;
+    values.image= objToUpdate.image;
+    
+    return values;
+  };
+
+
 
   const handleUpdatEducation = (objToUpdate) => {
     values.id = objToUpdate.id;
@@ -176,6 +236,8 @@ const useFormValidation = (object, callback, SetIsUpdate, ComponentName) => {
     handleUpdatExperience,
     handleUpdatLanguages,
     handleUpdatSkills,
+    handleUpdatPersonalInfo,
+    handleChangeImage,
   };
 };
 

@@ -3,7 +3,7 @@ import "./App.css";
 import ReactToPrint from "react-to-print";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
-import Personalinfo from "./features/PersonalInfo";
+import Personalinfo from "./components/Personal Info/PersonalInfo";
 import Education from "./components/Education/Education";
 import Skills from "./components/Skills/Skills";
 import References from "./features/References";
@@ -68,7 +68,12 @@ function App() {
             sendData={(references) => handleReciveReferences(references)}
           />
         </div>
-        {Object.keys(dataPersonnalInfo).length !== 0 || dataEducations.length > 0 || dataExperiences.length >0 || dataSkills.length>0 || dataLanguages.length >0 || dataReferences.length >0 ? (
+        {Object.keys(dataPersonnalInfo).length !== 0 ||
+        dataEducations.length > 0 ||
+        dataExperiences.length > 0 ||
+        dataSkills.length > 0 ||
+        dataLanguages.length > 0 ||
+        dataReferences.length > 0 ? (
           <div className="preview">
             <div className="cv-container">
               <Preview

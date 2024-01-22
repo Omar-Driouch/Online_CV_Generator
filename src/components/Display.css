@@ -1,3 +1,4 @@
+/* Education Item Container */
 .item-education {
 	background-color: rgb(226, 226, 226);
 	align-items: center;
@@ -9,31 +10,30 @@
 	display: flex;
 	flex-direction: row;
 	gap: 10px;
-	padding: 5px 5px 5px
-	
+	padding: 5px;
+	/* Adjusted padding values */
 }
 
-
-.item-education h6{
+/* Heading Styles */
+.item-education h6 {
 	background-color: #fff;
-	padding: 10px 10px;
-	border: #009b17;
+	padding: 10px;
 	border-radius: 15px;
 	border: 1px solid #e0e0e0;
 	margin-top: 10px;
 }
 
-
+/* Button Styles */
 .item-education button {
 	background-color: rgb(224, 224, 224);
 	padding: 1px 5px;
-
 	border-radius: 10px;
 	font-weight: 700;
 	color: #fff;
 	border-color: #fff;
 }
 
+/* Remove Button Styles */
 .item-education .removebutton {
 	background-color: rgb(255, 255, 255);
 	align-items: center;
@@ -41,32 +41,33 @@
 	border-radius: 8px;
 	box-sizing: border-box;
 	color: #e20c0c;
-	transition: .2s;
+	transition: 0.2s;
 }
 
+/* Remove Button Hover Effect */
 .removebutton:hover {
 	background: #e41d03;
 	color: #fff;
 }
 
-.item-education .updatebutton:hover {
-	background-color: #009b17;
-	color: #fff;
-}
-
- 
-
+/* Update Button Styles */
 .item-education .updatebutton {
 	background-color: rgb(255, 255, 255);
 	align-items: center;
 	border: 1px solid;
 	border-radius: 8px;
- 
 	box-sizing: border-box;
 	color: #009b17;
-	transition: .2s;
+	transition: 0.2s;
 }
 
+/* Update Button Hover Effect */
+.item-education .updatebutton:hover {
+	background-color: #009b17;
+	color: #fff;
+}
+
+/* Container for Buttons */
 .item-education .buttonsDiv {
 	display: flex;
 	flex-direction: column;

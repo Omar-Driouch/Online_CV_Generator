@@ -13,7 +13,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import FormHelperText from "@mui/material/FormHelperText";
-import useFormValidation from "../../features/FormValidation";
+import useFormValidation from "../../FormValidation";
 
 // eslint-disable-next-line react/prop-types
 const Skills = ({ sendData }) => {
