@@ -28,14 +28,14 @@ const PersonalInfo = ({ sendData }) => {
 
   const SetIsUpdate = (obj) => {
    
-    setPersonalinfo(
+    setPersonalinfos(
       Personalinfos.map((ed) => {
         return ed.id == obj.id
           ? {
               id: obj.id,
               firstName: obj.firstName,
               lastName: obj.lastName,
-              email: obj.e_mail,
+              email: obj.email,
               phone: obj.phone,
               title: obj.title,
               address: obj.address,
@@ -77,9 +77,9 @@ const PersonalInfo = ({ sendData }) => {
   const [educationToUpdate, seteExperienceToUpdate] = useState({});
 
   const handleRemove = (itemToRemove) => {
-    setPersonalinfos([
-      ...Personalinfos.filter((item) => item.id !== itemToRemove.id),
-    ]);
+    setPersonalinfos(
+      Personalinfos.filter((item) => item.id !== itemToRemove.id),
+    );
   };
 
   const handleUpdateExperience = (itemToUpdate) => {
@@ -90,7 +90,7 @@ const PersonalInfo = ({ sendData }) => {
   const [isHide, setIsHide] = useState(true);
 
   sendData(Personalinfos);
-  console.log(Personalinfos, " hELLO ");
+  
 
   return (
     <>
@@ -103,9 +103,9 @@ const PersonalInfo = ({ sendData }) => {
         </div>
         {!isHide && (
           <Box className="form-box" component="form" onSubmit={handleSubmit}>
-            <div className="d-flex flex-wrap gap-3 justify-content-start align-items-end">
-              <div className="mb-0" style={{ width: "30%" }}>
-                <div className="mb-0 img-box">
+            <div className="d-flex flex-wrap gap-0 justify-content-center items-center ">
+              <div className="mb-2" style={{ width: "100%" }}>
+                <div className="mb-2 img-box">
                   <label className="img-label" htmlFor="image">
                     <Stack direction="row">
                       <Avatar
@@ -124,7 +124,9 @@ const PersonalInfo = ({ sendData }) => {
                   />
                 </div>
               </div>
-              <div className="mb-3" style={{ width: "30%" }}>
+            </div>
+            <div className="d-flex flex-wrap gap-3 justify-content-start align-items-end">
+              <div className="mb-0" style={{ width: "30%" }}>
                 <TextField
                   id="firstName"
                   label="first name"
@@ -135,7 +137,7 @@ const PersonalInfo = ({ sendData }) => {
                   helperText={errors.firstName}
                 />
               </div>
-              <div className="mb-3" style={{ width: "30%" }}>
+              <div className="mb-0" style={{ width: "30%" }}>
                 <TextField
                   id="lastName"
                   label="last Name"
@@ -146,7 +148,7 @@ const PersonalInfo = ({ sendData }) => {
                   helperText={errors.lastName}
                 />
               </div>
-              <div className="mb-3" style={{ width: "30%" }}>
+              <div className="mb-0" style={{ width: "30%" }}>
                 <TextField
                   id="email"
                   label="e-mail"
@@ -157,7 +159,7 @@ const PersonalInfo = ({ sendData }) => {
                   helperText={errors.email}
                 />
               </div>
-              <div className="mb-3" style={{ width: "30%" }}>
+              <div className="mb-0" style={{ width: "30%" }}>
                 <TextField
                   id="phone"
                   label="Phone"
@@ -169,7 +171,7 @@ const PersonalInfo = ({ sendData }) => {
                   helperText={errors.phone}
                 />
               </div>
-              <div className="mb-3" style={{ width: "30%" }}>
+              <div className="mb-0" style={{ width: "30%" }}>
                 <TextField
                   id="title"
                   label="Title"
@@ -180,7 +182,7 @@ const PersonalInfo = ({ sendData }) => {
                   helperText={errors.title}
                 />
               </div>
-              <div className="mb-3" style={{ width: "30%" }}>
+              <div className="mb-0" style={{ width: "30%" }}>
                 <TextField
                   id="address"
                   label="address"
@@ -191,8 +193,9 @@ const PersonalInfo = ({ sendData }) => {
                   helperText={errors.address}
                 />
               </div>
-              <div className="mb-3" style={{ width: "30%" }}>
+              <div className="mb-3" style={{ width: "100%", height: "100%" }}>
                 <TextField
+                  style={{ width: "100%", height: "100%" }}
                   id="description"
                   label="description"
                   variant="outlined"
@@ -203,7 +206,10 @@ const PersonalInfo = ({ sendData }) => {
                 />
               </div>
             </div>
-            <button type="submit" className="add-btn">
+            <button
+              type="submit"
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded flex gap-2 items-center"
+            >
               <span>
                 <FiPlus />
               </span>

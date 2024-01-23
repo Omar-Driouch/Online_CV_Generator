@@ -6,7 +6,7 @@ import Header from "./components/Header";
 import Personalinfo from "./components/Personal Info/PersonalInfo";
 import Education from "./components/Education/Education";
 import Skills from "./components/Skills/Skills";
-import References from "./features/References";
+import References from "./components/References/References";
 import Experience from "./components/Experience/Experience";
 import Language from "./components/Language/Language";
 import Preview from "./components/Preview/Preview";
@@ -44,15 +44,7 @@ function App() {
   return (
     <div className="container-app">
       <Header />
-      {/* <ReactToPrint
-        pageStyle={{ padding: "0", marging: "0" }}
-        trigger={() => (
-          <button className="border-0 text-light fw-bold rounded-1 m-3 bg-primary py-2 px-5">
-            download
-          </button>
-        )}
-        content={() => printRef.current}
-      /> */}
+
       <main>
         <div className="sections-container">
           <Personalinfo sendData={(info) => handleReceivePersonnalInfo(info)} />
@@ -68,28 +60,26 @@ function App() {
             sendData={(references) => handleReciveReferences(references)}
           />
         </div>
-        {Object.keys(dataPersonnalInfo).length !== 0 ||
+       {/*  {Object.keys(dataPersonnalInfo).length !== 0 ||
         dataEducations.length > 0 ||
         dataExperiences.length > 0 ||
         dataSkills.length > 0 ||
         dataLanguages.length > 0 ||
-        dataReferences.length > 0 ? (
+        dataReferences.length > 0 ? ( */}
           <div className="preview">
             <div className="cv-container">
               <Preview
-                ref={printRef}
-                dataSkills={dataSkills}
-                dataEducations={dataEducations}
-                dataLanguages={dataLanguages}
-                dataExperiences={dataExperiences}
-                dataReferences={dataReferences}
-                dataPersonnalInfo={dataPersonnalInfo}
+                personalInfo={dataPersonnalInfo}
+                skills={dataSkills}
+                languages={dataLanguages}
+                experiences={dataExperiences}
+                educations={dataEducations}
               />
             </div>
           </div>
-        ) : (
+       {/*  ) : (
           <h1 className="start-text">start generate cv</h1>
-        )}
+        )} */}
       </main>
       <Footer />
     </div>

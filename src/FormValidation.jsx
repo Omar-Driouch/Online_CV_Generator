@@ -208,6 +208,15 @@ const useFormValidation = (object, callback, SetIsUpdate, ComponentName) => {
     return values;
   };
 
+  const handleUpdatReferencess = (objToUpdate) => {
+    
+    values.id = objToUpdate.id;
+    values.language = objToUpdate.language;
+    values.level = objToUpdate.level;
+
+    return values;
+  };
+
   const handleUpdatSkills = (objToUpdate) => {
     values.id = objToUpdate.id;
     values.skill = objToUpdate.skill;

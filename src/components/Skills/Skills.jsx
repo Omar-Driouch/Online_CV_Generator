@@ -113,7 +113,10 @@ const Skills = ({ sendData }) => {
                 />
               </div>
             </div>
-            <button type="submit" className="add-btn">
+            <button
+              type="submit"
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded flex gap-2 items-center"
+            >
               <span>
                 <FiPlus />
               </span>
