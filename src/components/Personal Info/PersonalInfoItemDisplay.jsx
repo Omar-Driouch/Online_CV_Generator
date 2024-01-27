@@ -1,5 +1,8 @@
 import React from "react";
 import "../Display.css";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+
 const PersonalInfoItemDisplay = ({
   Personalinfo,
   handleRemove,
@@ -7,21 +10,24 @@ const PersonalInfoItemDisplay = ({
 }) => {
   return (
     <>
-      <div className="item-education" key={Personalinfo.id}>
-        <h6>{Personalinfo.firstName}</h6>
+      <div
+        className="bg-[#f5f5f5] border font-bold py-2 px-2 rounded flex gap-5 items-center"
+        key={Personalinfo.id}
+      >
+        <h6 className=" text-[25px]">{Personalinfo.firstName}</h6>
 
         <div className="buttonsDiv">
           <button
-            className="removebutton"
+            className="bg-[#db061b]  text-white font-bold py-2 px-2 mr-2 rounded gap-5 items-center"
             onClick={() => handleRemove(Personalinfo)}
           >
-            Remove
+            <DeleteForeverIcon></DeleteForeverIcon>
           </button>
           <button
-            className="updatebutton"
+            className="bg-[#057806]  text-white font-bold py-2 px-2 mr-2 rounded gap-5 items-center"
             onClick={() => handleUpdate(Personalinfo)}
           >
-            Update
+            <EditIcon></EditIcon>
           </button>
         </div>
       </div>

@@ -61,6 +61,7 @@ const Experience = ({ sendData }) => {
       role: "",
       location: "",
       workType: "",
+      tasks:"",
       startDate: "",
       endDate: "",
     },
@@ -145,7 +146,8 @@ const Experience = ({ sendData }) => {
                   helperText={errors.workType}
                 />
               </div>
-              <div className="mb-3">
+
+              <div className="mb-3" style={{ width: "30%" }}>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DatePicker
                     id="statDate"
@@ -164,7 +166,7 @@ const Experience = ({ sendData }) => {
                   />
                 </LocalizationProvider>
               </div>
-              <div className="mb-3">
+              <div className="mb-3" style={{ width: "30%" }}>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DatePicker
                     id="endDate"
@@ -180,6 +182,20 @@ const Experience = ({ sendData }) => {
                     }}
                   />
                 </LocalizationProvider>
+              </div>
+              <div className="mb-3" style={{ width: "30%" }}>
+                <TextField
+                  id="tasks"
+                  label="Add tasks"
+                  variant="filled"
+                  placeholder="Add task for each line"
+                  multiline
+                  maxRows={3}
+                  value={values.tasks}
+                  onChange={handleChange}
+                  error={errors.tasks}
+                  helperText={errors.tasks}
+                />
               </div>
             </div>
             <button

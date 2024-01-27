@@ -36,6 +36,7 @@ const Education = ({ sendData }) => {
                     school: education.school,
                     degree: education.degree,
                     study: education.study,
+                    location: education.location,
                     startDate: education.startDate,
                     endDate: education.endDate,
                   }
@@ -57,6 +58,7 @@ const Education = ({ sendData }) => {
        school: "",
        degree: "",
        study: "",
+       location:"",
        startDate: "",
        endDate: "",
      },
@@ -136,7 +138,18 @@ const Education = ({ sendData }) => {
                   helperText={errors.study}
                 />
               </div>
-              <div className="mb-3">
+              <div className="mb-3" style={{ width: "30%" }}>
+                <TextField
+                  id="location"
+                  label="location"
+                  variant="outlined"
+                  value={values.location}
+                  onChange={handleChange}
+                  error={errors.location}
+                  helperText={errors.location}
+                />
+              </div>
+              <div className="mb-3" style={{ width: "30%" }}>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DatePicker
                     id="startDate"
@@ -155,7 +168,7 @@ const Education = ({ sendData }) => {
                   />
                 </LocalizationProvider>
               </div>
-              <div className="mb-3">
+              <div className="mb-3" style={{ width: "30%" }}>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DatePicker
                     id="endDate"

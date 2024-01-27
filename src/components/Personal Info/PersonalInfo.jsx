@@ -193,12 +193,14 @@ const PersonalInfo = ({ sendData }) => {
                   helperText={errors.address}
                 />
               </div>
-              <div className="mb-3" style={{ width: "100%", height: "100%" }}>
+              <div className="mb-3" style={{ width: "80%"}}>
                 <TextField
-                  style={{ width: "100%", height: "100%" }}
+                  style={{ width: "100%" }}
                   id="description"
                   label="description"
                   variant="outlined"
+                  multiline
+                  maxRows={5}
                   value={values.description}
                   onChange={handleChange}
                   error={errors.description}

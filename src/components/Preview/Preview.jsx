@@ -1,5 +1,6 @@
 import React from "react";
 import { FaPhone } from "react-icons/fa6";
+import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import { MdEmail, MdLocationCity, MdLocationPin } from "react-icons/md";
 const Preview = ({
   personalInfo,
@@ -8,7 +9,6 @@ const Preview = ({
   educations,
   experiences,
 }) => {
- 
   return (
     <div className="preview w-full h-full flex">
       <div className="side-left overflow-hidden w-[230px] bg-blue-950 min-h-full">
@@ -100,18 +100,18 @@ const Preview = ({
         </div>
       </div>
       <div className="side-right flex-1 bg-slate-50 text-slate-700 min-h-full">
-        <h1 className="text-center uppercase text-[25px] mt-4 font-[700]">
-          {personalInfo?.firstName} {personalInfo?.lastName}
+        <h1 className="text-center uppercase text-[35px] mt-2 font-[700]">
+          {personalInfo[0]?.firstName} {personalInfo[0]?.lastName}
         </h1>
-        <h6 className="text-center capitalize text-[16px] font-[400]">
-          {personalInfo?.speciality}
+        <h6 className="text-center capitalize text-[28px] font-[400]">
+          {personalInfo[0]?.title}
         </h6>
-        <div className="profile px-3 mt-9 text-slate-700">
-          <h3 className="text-[22px] font-[600] mb-2 border-b-2 border-slate-700 tracking-[2px] uppercase">
+        <div className="profile px-3 mt-2 text-slate-700">
+          {/*  <h3 className="text-[22px] font-[600] mb-2 border-b-2 border-slate-700 tracking-[2px] uppercase">
             profile
-          </h3>
-          <p className="mb-3 w-full overflow-hidden text-[12px]">
-            {personalInfo[0]?.profile}
+          </h3> */}
+          <p className="mb-3 w-full overflow-hidden text-[14px]">
+            {personalInfo[0]?.description}
           </p>
         </div>
         <div className="educations px-3 mt-4 text-slate-700">
@@ -122,23 +122,18 @@ const Preview = ({
             {educations?.map((edu) => (
               <div className="edu-item py-2" key={edu.id}>
                 <div className="edu-duration flex gap-2 text-[12px] text-mainColor font-[700]">
-                  <span>
-                    {edu.degree} in {edu.study}
+                  <span className="text-[18px]">
+                    {edu.degree ? edu.degree + " degree in " + edu.study : " "}
                   </span>
                 </div>
-                <div className="edu-school font-[600] text-[13px] capitalize">
-                  {edu.school}{" "}
-                  <span>
-                    {edu.present ? (
-                      <span>{edu.present && "present"}</span>
-                    ) : (
-                      <span>{edu.endDate}</span>
-                    )}
-                  </span>
+                <div className="edu-school font-[600] text-[13px] capitalize flex justify-between items-center ">
+                  <div className="edu-degree-field list-disc ms-0 font-[500] text-[12px] capitalize">
+                    {edu.school}
+                  </div>
+                  <div className="edu-degree-field list-disc ms-5 font-[500] text-[12px] capitalize">
+                    {edu.startDate} - {edu.endDate}
+                  </div>
                 </div>
-                <li className="edu-degree-field list-disc ms-4 font-[500] text-[12px] capitalize">
-                  {edu.degree} in {edu.study}
-                </li>
               </div>
             ))}
           </ul>
@@ -151,23 +146,37 @@ const Preview = ({
             {experiences?.map((exp) => (
               <div className="exp-item py-2" key={exp.id}>
                 <div className="flex justify-between items-center">
-                  <div className="exp-company font-[600] text-[13px] capitalize">
-                    {exp.company}
+                  <div className="exp-company font-[600] text-[25px] capitalize">
+                    <span className="text-[18px]">{exp.role}</span>
                   </div>
                   <div className="exp-duration flex gap-2 text-[12px] text-mainColor font-[700]">
                     <span>{exp.startDate}</span>
                     <span>-</span>
-                    {exp.present ? (
-                      <span>{exp.present && "present"}</span>
-                    ) : (
-                      <span>{exp.endDate}</span>
-                    )}
+                    <span>{exp.endDate}</span>
                   </div>
                 </div>
-                <div className="exp-role font-[500] text-[12px] capitalize">
-                  {exp.role}
+                <div className="flex justify-between items-center">
+                  <div className="exp-role font-[500] text-[16px] capitalize">
+                    {exp.company}
+                  </div>
+                  <div className="exp-role font-[500] text-[16px] capitalize">
+                    {exp.location}
+                  </div>
                 </div>
-                <p className="exp-description text-[12px]">{exp.description}</p>
+                <div className="exp-description text-[12px]">
+                  <div>
+                    {exp?.tasks &&
+                      exp.tasks.split("\n").map((e) => (
+                        <div key={e}>
+                          {" "}
+                          <FiberManualRecordIcon
+                            style={{ width: "10px" }}
+                          ></FiberManualRecordIcon>{" "}
+                          {e}
+                        </div>
+                      ))}
+                  </div>
+                </div>
               </div>
             ))}
           </ul>

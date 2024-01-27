@@ -16,7 +16,7 @@ const useFormValidation = (object, callback, SetIsUpdate, ComponentName) => {
         newErrors.lastName = "last Name is required";
       }
       if (!values.email.trim()) {
-        newErrors.email = "Email of study is required";
+        newErrors.email = "Email is required";
       }
 
       if (values.phone === "") {
@@ -45,6 +45,9 @@ const useFormValidation = (object, callback, SetIsUpdate, ComponentName) => {
       if (!values.study.trim()) {
         newErrors.study = "field of study is required";
       }
+      if (!values.location.trim()) {
+        newErrors.location = "Location is required";
+      }
 
       if (values.startDate === "") {
         newErrors.startDate = "Start date is required";
@@ -71,6 +74,10 @@ const useFormValidation = (object, callback, SetIsUpdate, ComponentName) => {
         newErrors.workType = "Work Type is required";
       }
 
+      if (values.tasks === "") {
+        newErrors.tasks = "tasks is required";
+      }
+   
       if (values.startDate === "") {
         newErrors.startDate = "Start date is required";
       }
@@ -196,6 +203,7 @@ const useFormValidation = (object, callback, SetIsUpdate, ComponentName) => {
     values.school = objToUpdate.school;
     values.degree = objToUpdate.degree;
     values.study = objToUpdate.study;
+    values.location = objToUpdate.location;
     return values;
   };
 
@@ -232,6 +240,7 @@ const useFormValidation = (object, callback, SetIsUpdate, ComponentName) => {
     values.role = objToUpdate.role;
     values.location = objToUpdate.location;
     values.workType = objToUpdate.workType;
+    values.tasks = objToUpdate.tasks;
     return values;
   };
 
