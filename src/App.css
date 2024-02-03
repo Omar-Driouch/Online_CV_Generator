@@ -13,6 +13,7 @@ main{
     flex: 1;
     height: 1300px;
     overflow-y: auto;
+    
      
 }
 .preview {
@@ -110,40 +111,34 @@ label{
     top: 0;
     left: 0;
   }
-/*   .img-box label.img-label {
-    color:#619699 ;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    border: 2px dashed #619699;
-    width: 50px;
-    height: 50px;
-    display: block;
-    text-align: center;
-    line-height: 10px;
-  } */
+ 
   .img-box label.img-label svg{
     font-size: 0px;
+    
   }
 .section-heading{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
     /* background: #619699; */
     /* margin-bottom: 20px; */
     cursor: pointer;
     border-radius: 10px;
-    color: #619699;
+    color: #3b97ff;
+    
 }
 .section-heading h1{
-    font-size: 22px;
+    font-size: 28px;
     text-transform: capitalize;
     letter-spacing: 0.5px;
     font-weight: 600;
+   
 }
 .section-heading button{
-    color: #619699;
+    color: #3b97ff;
+    
 }
 .add-btn{
     margin-top: 10px;
@@ -160,7 +155,8 @@ label{
     cursor: pointer;
     text-transform: capitalize;
     border-radius: 5px;
-    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
 }
 
 .skills-list ,.educations-list{
